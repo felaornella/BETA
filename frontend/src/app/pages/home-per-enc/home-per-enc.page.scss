@@ -1,0 +1,100 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.rowspinner {
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70%;
+    justify-content: center;
+}
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+#contentGeneral{
+  --ion-background-color:#f2f2f2;
+}
+
+#nuevaPublicacion{
+  --padding-top: .5rem;
+  --padding-bottom: .5rem;
+  --padding-start:  2rem;
+  --padding-end: 2rem;
+  height: fit-content; 
+  --border-color: #28BA62;
+  --color: #28BA62;
+  --border-width: 0.25rem;
+  --border-radius: 1rem;
+  --box-shadow: 0px 5px 5px #00000033
+}
+
+.btnMenuHome{
+  width: 8rem;
+  height: 8rem;
+}
+
+#btnMenuHomeAdopTran{
+  --background: #8F00FF;
+  --border-radius: 0.5rem;
+  --box-shadow: 0px 5px 5px #00000033;
+
+}
+
+#btnMenuHomePerEnc{
+  --background: #0094FF;
+  --border-radius: 0.5rem;
+  --box-shadow: 0px 5px 5px #00000033;
+
+}
+
+#btnMenuHomeMap{
+  --background: #28BA62;
+  --border-radius: 0.5rem;
+  --box-shadow: 0px 5px 5px #00000033;
+}
+
+#btnMenuHomeAgru{
+  --background: #FFCA22;
+  --border-radius: 0.5rem;
+  --box-shadow: 0px 5px 5px #00000033;
+}
+
+#headerSideMenu{
+  --box-shadow: none;
+  --border: none;
+}
+
+.header-md::after {
+  display: none;
+}
+
+ion-range {
+  --bar-height: .2rem;
+  padding: 0 1rem 0 1rem;
+  --knob-size: 1.5rem;
+  --knob-background: var(--ion-color-light);
+  --bar-background: rgba(0,0,0,0.4);
+  --bar-background-active: rgba(255,255,255,7)
+  --bar-background: #a2d2ff;
+}

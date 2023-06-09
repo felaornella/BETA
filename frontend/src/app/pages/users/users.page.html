@@ -1,0 +1,188 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background:var(--ion-color-background)">
+  <ion-row> 
+    <ion-col class="col-navbar" id="header">
+      <img src="assets/logo_con_nombre.png" style="max-height: 15rem; padding-block: 10px;">
+    </ion-col> 
+  </ion-row>
+  <!-- SELECTOR DE FORMA DE CARGA -->
+  <ion-row style="height: 3.5rem; padding-inline: 1rem;" *ngIf="tipoPublicacion!=2">
+    <ion-col size="6" style="padding: 0 .5rem;">
+      <ion-button (click)="switchType(1)" 
+                  [ngClass]="{'typeButton': true,
+                              'selected': showing == 1}">
+        <ion-label style="font-weight: 600;">Iniciar Sesion</ion-label>
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" style="padding: 0 .5rem;">
+      <ion-button (click)="switchType(2)"
+                  [ngClass]="{'typeButton': true,
+                              'selected': showing == 2}">
+        <ion-label style="font-weight: 600;">Registrarse</ion-label>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-top: 1.25rem;">
+    <!--LOGIN-->
+    <ion-col *ngIf="showing == 1" style="padding:0">
+      <form id="login">
+        <ion-item  lines="none">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="email" required  ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+        </ion-item>
+        <ion-row class="ion-padding">
+          <ion-col>
+            <span style="text-decoration: underline; color: var(--ion-color-beta);" (click)="switchType(3)">¿Olvidaste tu contraseña?</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    
+    
+      <ion-row>
+        <ion-col class="ion-padding">
+          <ion-button (click)="login()" type="submit" form="login" color="beta" expand="block"><ion-text color="light">Iniciar sesion</ion-text></ion-button>
+        </ion-col>
+      </ion-row>
+      
+      <!-- <ion-row>
+        <ion-col class="ion-padding">
+          <span class="d-block text-center my-4 text-muted">— o —</span>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col class="ion-padding">
+          <ion-button type="button" expand="block" id="googleLogin">
+            <ion-icon name="logo-google" slot="start"></ion-icon>
+            Iniciar sesion con Google
+          </ion-button>
+        </ion-col>
+      </ion-row> -->
+    </ion-col>
+
+    <!--REGISTER-->
+    <ion-col *ngIf="showing == 2" style="padding:0">
+      <form id="register"  >
+        <ion-item lines="none" style="margin-top: 1rem; margin-bottom: .5rem;">
+          <ion-col style="padding: 0;">
+            <ion-row>
+              <ion-label>Tipo de Usuario</ion-label>
+            </ion-row>
+            <ion-row style="margin-top: .75rem;">
+              <ion-select placeholder="Tipo de Usuario" 
+                          (ionChange)="setValue()"
+                          [interfaceOptions]="{size: 'cover'}" interface="popover"
+                          id="tipoUsuarioSelect"
+                          name="local_es_organizacion"
+                          [(ngModel)]="local_es_organizacion"
+                          style="max-width: 100%; width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                  <ion-select-option value="false">Usuario</ion-select-option>
+                  <ion-select-option value="true">Agrupacion</ion-select-option>
+              </ion-select>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Nombre *</ion-label>
+          <ion-input type="text" required [(ngModel)]="user.nombre" name="nombre" ></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion" >
+          <ion-label position="floating">Descripcion</ion-label>
+          <ion-textarea [(ngModel)]="user.descripcion_breve" name="descripcion_breve" rows="2" maxLength="350" style="caret-color: var(--ion-color-beta) !important; border-bottom:2px solid rgba(0,0,0,.7); opacity: 100%;"></ion-textarea>
+        </ion-item>
+        <ion-item lines="none" *ngIf="!user.es_organizacion">
+          <ion-label position="floating">Apellido *</ion-label>
+          <ion-input [(ngModel)]="user.apellido" name="apellido" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Email *</ion-label>
+          <ion-input [(ngModel)]="user.email" name="email" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="fixed">Ubicacion *</ion-label>
+          <ion-button (click)="openMap()" [fill]="user.geo_lat ? 'solid' : 'outline' " color="beta"  expand="block" style="height: 2.5rem; width: 100%;" >
+            <ion-icon  name="location" style="height: 1rem;"></ion-icon>
+            <span style="font-family: DM-Sans; font-weight: bold;">Abrir Mapa</span>
+          </ion-button>
+        </ion-item>
+        <ion-item lines="none" *ngIf="!user.es_organizacion">
+          <ion-label position="floating" style="transform : translateY(0%); -webkit-transform : translateY(0%)">Fecha de nacimiento *</ion-label>
+          <ion-input [(ngModel)]="user.fecha_nacimiento" name="fecha_nacimiento" type="date" stlye="color: black!important" required></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="floating" style="transform : translateY(0%); -webkit-transform : translateY(0%)">Fecha de creacion *</ion-label>
+          <ion-input [(ngModel)]="user.fecha_creacion" name="fecha_creacion" type="date" stlye="color: black!important" required></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Telefono</ion-label>
+          <ion-input [(ngModel)]="user.telefono" name="telefono" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label position="floating">Instagram</ion-label>
+          <ion-input [(ngModel)]="user.instagram" name="instagram" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="floating">DNI del Responsable *</ion-label>
+          <ion-input [(ngModel)]="user.dni_responsable" name="dni_responsable" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="floating">Nombre del responsable *</ion-label>
+          <ion-input [(ngModel)]="user.nombre_responsable" name="nombre_responsable" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="floating">Apellido del responsable *</ion-label>
+          <ion-input [(ngModel)]="user.apellido_responsable" name="apellido_responsable" type="text" required></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="user.es_organizacion">
+          <ion-label position="floating">Link de donacion</ion-label>
+          <ion-input [(ngModel)]="user.link_donacion" name="link_donacion" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none" >
+          <ion-label position="floating">Contraseña *</ion-label>
+          <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col class="ion-padding">
+            <ion-button type="submit" form="register" (click)="register()" color="beta" expand="block">Registrarse</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>    
+    </ion-col>
+
+    <!--OLVIDASTE PASSWORD-->
+    <ion-col *ngIf="showing == 3" style="padding:0">
+      <ion-row style="justify-content: center;">
+        <ion-col size="7" style="padding: 0 .5rem; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+          <ion-label style="font-weight: 600; color: var(--ion-color-beta); font-family: DM Sans; font-size: 1rem; margin-top: .25rem;">
+            Recuperar Contraseña
+          </ion-label>
+          <div style="height: 2px; width: 80%; background: var(--ion-color-beta); margin-top: 1rem;"></div>
+        </ion-col>
+      </ion-row>
+      <form id="recuperar" class="ion-padding">
+        <ion-item lines="none">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="text" required></ion-input>
+        </ion-item>
+      </form>
+      <ion-row  style="width: 90%;margin-inline: auto; ;margin-bottom: 2rem; margin-top: 1rem;">
+        <ion-col style="text-align: center;">
+          <ion-button *ngIf="hide_spinner" (click)="recuperar()" style="width: 100%; height: 4rem; --background: var(--ion-color-beta); --border-radius: 1rem">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Recuperar Contraseña </span>
+          </ion-button>
+          <ion-spinner *ngIf="!hide_spinner" color="beta" name="circular" style="transform: scale(1.5)"></ion-spinner>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>

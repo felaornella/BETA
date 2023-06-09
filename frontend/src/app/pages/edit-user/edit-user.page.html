@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="perfil/miperfil"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="user">
+
+  <ion-row [ngClass]="{'background-user': !user.es_organizacion, 'background-association': user.es_organizacion}">    
+    <ion-col size="12">
+      <ion-content style=" height: 13rem; overflow: hidden; --background: none;">
+        <img *ngIf="user?.imagen || img_new" [src]="getUrlImgPerfil(user.imagen)" class="image-profile">
+        <ion-icon *ngIf="!user?.imagen && !img_new" style="color: white" name="person-circle" class="image-profile"></ion-icon>   
+      
+       <!-- <img [src]="getUrlImgPerfil(user.imagen)" class="image-profile">
+      Button relative to img, with icon of pencil, inside the photo on top right -->
+        <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-left: 3rem;">
+          <ion-fab-button (click)="open_file_selector()" style="--background:white; opacity: 60%;" size="small">
+            <ion-icon name="pencil-outline" style="color:black;"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-content>
+      
+    </ion-col>
+    
+    <ion-col size="12" class="col-center name-user">
+      <ion-label class="nombreTitulo" color="light">{{user.nombre}} {{user.apellido}}</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row
+    style="display: flex; justify-content: center; align-items: center; background-color: var(--ion-color-background); height: 3rem;">
+    <ion-col>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Editar perfil </b></p>
+        <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;" [style]="!user.es_organizacion ? 'background-color: var(--ion-color-beta)': 'background-color: var(--ion-color-asociation)'"></div>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <form id="editUser" style="padding-inline: .2rem; padding-top: 1rem;">
+    <input [(ngModel)]="local_imagen" name="local_imagen" type="file" accept="image/jpeg" id="imagen_perfil" hidden (change)="changeListener($event)">
+
+    <ion-item lines="none">
+      <ion-label class="labelInput"position="floating">Nombre *</ion-label>
+      <ion-input name="nombre" type="text" required [(ngModel)]="user.nombre"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="floating">Descripcion</ion-label>
+      <ion-textarea name="descripcion_breve" [(ngModel)]="user.descripcion_breve" rows="2" maxLength="350"
+        style="caret-color: var(--ion-color-beta) !important; border-bottom:2px solid rgba(0,0,0,.7); opacity: 100%;">
+      </ion-textarea>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!user.es_organizacion">
+      <ion-label class="labelInput"position="floating">Apellido *</ion-label>
+      <ion-input type="text" required name="apellido" [(ngModel)]="user.apellido"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user && !user.es_organizacion">
+      <ion-label class="labelInput"position="floating" style="transform : translateY(30%) scale(0.75); -webkit-transform : translateY(30%)  scale(0.75)">Fecha de nacimiento *</ion-label>
+      <ion-input name="fecha_nacimiento" type="date" required [(ngModel)]="user.fecha_nacimiento"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user && user.es_organizacion">
+      <ion-label class="labelInput"position="floating" style="transform : translateY(30%) scale(0.75); -webkit-transform : translateY(30%)  scale(0.75)">Fecha de creacion *</ion-label>
+      <ion-input name="fecha_creacion" type="date" required [(ngModel)]="user.fecha_creacion"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="fixed">Ubicacion *</ion-label>
+      <ion-button (click)="openMap()" [fill]="user.geo_lat ? 'solid' : 'outline' " color="beta"  expand="block" style="height: 2.5rem; width: 100%;" >
+        <ion-icon  name="location" style="height: 1rem;"></ion-icon>
+        <span style="font-family: DM-Sans; font-weight: bold;">Abrir Mapa</span>
+      </ion-button>
+    </ion-item>
+    
+
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="floating">DNI del Responsable *</ion-label>
+      <ion-input type="text" required name="dni_responsable" [(ngModel)]="user.dni_responsable"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="floating">Nombre del responsable *</ion-label>
+      <ion-input type="text" required name="nombre_responsable" [(ngModel)]="user.nombre_responsable"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="floating">Apellido del responsable *</ion-label>
+      <ion-input type="text" required name="apellido_responsable" [(ngModel)]="user.apellido_responsable"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label class="labelInput"position="floating">Link de donacion</ion-label>
+      <ion-input [(ngModel)]="user.link_donacion" name="link_donacion" type="text"></ion-input>
+    </ion-item>
+    <!-- Campos de contato y redes, con boton de visible a la derecha del input centrado verticalmente-->
+    <ion-item lines="none">
+      <ion-label class="labelInput"position="floating">Email</ion-label>
+      <ion-input type="text" disabled="true" name="email" [(ngModel)]="user.email"></ion-input>
+      <ion-button slot="end" disabled="false" color="beta" [fill]="user.email_visible ? 'solid' : 'outline'" style="margin-block: auto "  (click)="user.email_visible = !user.email_visible">
+        <ion-icon [name]="user.email_visible ? 'eye' : 'eye-off'"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="labelInput"position="floating">Telefono</ion-label>
+      <ion-input type="text" name="telefono" [(ngModel)]="user.telefono"></ion-input>
+      <ion-button slot="end" vertical="bottom" color="beta" [fill]="user.telefono_visible ? 'solid' : 'outline'"  (click)="user.telefono_visible = !user.telefono_visible">
+        <ion-icon [name]="user.telefono_visible ? 'eye' : 'eye-off'" ></ion-icon>
+      </ion-button>
+    </ion-item>
+    
+    <ion-item lines="none">
+      <ion-label class="labelInput"position="floating">Instagram</ion-label>
+      <ion-input type="text" name="instagram" [(ngModel)]="user.instagram"></ion-input>
+      <ion-button slot="end" vertical="bottom" color="beta" [fill]="user.instagram_visible ? 'solid' : 'outline'"  (click)="user.instagram_visible = !user.instagram_visible">
+        <ion-icon [name]="user.instagram_visible ? 'eye' : 'eye-off'"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="ion-padding">
+        <ion-button type="submit" form="editUser" (click)="guardar()"
+          style="width: 100%; height: 3rem; --background: var(--ion-color-transito); --border-radius: 1rem">
+          <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Guardar
+          </span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+  </form>
+
+
+</ion-content>

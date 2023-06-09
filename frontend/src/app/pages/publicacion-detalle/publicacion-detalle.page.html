@@ -1,0 +1,323 @@
+<ion-header *ngIf="publicacion">
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button color="light" [defaultHref]="defaultBack()"></ion-back-button> -->
+      <ion-button (click)="back()" fill="clear">
+        <ion-icon slot="icon-only" color="light" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+
+    <ion-button slot="end" (click)="presentPopover($event)" fill="clear" stlye="--color:white!important;">
+      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical" color="light" ></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral" *ngIf="publicacion">  
+  <ion-row style="display: flex; justify-content: center; align-items: center; height: 3rem; background: {{headerColor}};">
+    <p style="    font-family: DM-Sans; font-weight: bold; font-size: 1.5rem; margin: 0; color: white;">{{headerTitle}}</p>
+  </ion-row>
+
+  <ion-row>
+    <ion-col style="display: flex; flex-direction: column; align-items: center; padding: 0; background-color: var(--ion-color-background);">
+      <div style="width: 100%;" *ngIf="publicacion.estadoGeneral==2 && !publicacion.vencida">
+        <p style="font-size: 1.5rem; font-family: 'DM-Sans'; font-weight: bold; background: darkslategrey;
+                      color: white; filter: drop-shadow(2px 6px 5px #00000077); width: 100%; text-align: center; margin: 0;">
+            PAUSADA
+        </p>
+      </div>
+      <div style="width: 100%;" *ngIf="publicacion.estadoGeneral==3 && !publicacion.vencida">
+        <p style="font-size: 1.5rem; font-family: 'DM-Sans'; font-weight: bold; background: darkslategrey;
+                      color: white; filter: drop-shadow(2px 6px 5px #00000077); width: 100%; text-align: center; margin: 0;">
+            FINALIZADA
+        </p>
+      </div>
+      <div style="width: 100%;" *ngIf="publicacion.vencida">
+        <p style="font-size: 1.5rem; font-family: 'DM-Sans'; font-weight: bold; background: darkslategrey;
+                      color: white; filter: drop-shadow(2px 6px 5px #00000077); width: 100%; text-align: center; margin: 0;">
+            VENCIDA
+        </p>
+      </div>
+      <img 
+        id="imagen_publicacion"
+        style="object-fit: cover; width: 100%; height: 20rem;"
+        [src]="getUrlImg(publicacion.imagen)">
+
+
+      <div>
+        <p style="text-transform: uppercase; font-family: DM-Sans; font-size: 1.35rem; margin: 1rem 0 .5rem 0; color: rgba(125,125,125,.8); font-weight: 600;">{{publicacion.tipo_mascota}}</p>
+      </div>
+
+      <div style="height: 2px; width: 80%;margin-bottom: 1rem;  background-color: {{headerColor}};"></div>
+      
+      <ion-row style="padding-left: 1.5rem; width: 100%;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Nombre</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.nombre}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Edad</span>
+          </ion-row>
+          <ion-row>
+            <span *ngIf="!publicacion.edad_aprox" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;">{{publicacion.edad}} {{publicacion.edad_unidad}}</span>
+            <span *ngIf="publicacion.edad_aprox" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;">{{publicacion.edad_estimada}} </span><small *ngIf="publicacion.edad_aprox" style="align-items: end; font-family: DM-Sans; font-weight: 600; padding: 0 0 0.2rem 0.5rem; display: flex;"> aprox.</small>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Sexo</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.sexo}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Raza</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.raza_mascota}}</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Color</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.colores.join(", ")}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Tamaño</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.size}}</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Descripcion extra</span>
+          </ion-row>
+          <ion-row>
+            <span *ngIf="publicacion.caracteristicas" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.caracteristicas}}</span>
+            <span *ngIf="!publicacion.caracteristicas" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;"> --- </span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Fecha de Publicación</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{publicacion.created_at}}    <small><small>{{(publicacion.vencida) ? "(VENCIDA)" : publicacion.tiempo_restante}}</small></small></span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="tipoPublicacion == 3 || tipoPublicacion ==4" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0; margin-left: -.75rem;">Descripción Medica</p>
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0; margin-top: 0;">Castración</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="publicacion.castracion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">Si</span>
+              <span *ngIf="!publicacion.castracion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0; margin-top: 0;">Vacunación</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{publicacion.vacunacion}}</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0;">Patologias o problemas extras</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="publicacion.patologias != null" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{publicacion.patologias}}</span>
+              <span *ngIf="publicacion.patologias == null || publicacion.patologias == ''" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+              <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0;">Medicaciones</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="publicacion.medicacion != null " style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{publicacion.medicacion}}</span>
+              <span *ngIf="publicacion.medicacion == null || publicacion.medicacion == ''" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="tipoPublicacion ==4" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0; margin-left: -.75rem;">Duracion del Tránsito</p>
+            <ion-row style="margin-top: .5rem;">
+              <span style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{publicacion.duracion_transito}}</span>
+            </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="width: 100%; margin-top: .5rem;" *ngIf="publicacion.retuvo">
+        <ion-col>
+          <ion-row style="text-align: center; width: 100%; padding: 0 1.1rem 0 1.5rem;">
+            <span style="font-family: DM-Sans; font-weight: 600; width: 100%; border: 2px solid var(--ion-color-encontrados); 
+                          color: var(--ion-color-encontrados); padding: 0.5rem; border-radius: 0.5rem;">LA MASCOTA FUE RETENIDA POR EL <br>PUBLICADOR EN BUSCA DE SU DUEÑO</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem;padding-right: 1.1rem;width: 100%; margin-top: .5rem;">
+        <ion-col>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Ubicacion</span>
+          </ion-row>
+          <ion-row>
+            <ion-button (click)="openMap()" color="beta" fill="outline" style="width: 100%; font-size: 1.15rem; font-weight: bold; font-family: DM-Sans; text-transform: none; height: 3rem;">
+              Ver en Mapa 
+              <ion-icon  style="color: beta; height: 1.25rem;" name="location"></ion-icon>
+            </ion-button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <div style="height: 2px; width: 80%;margin-bottom: 1rem; margin-top: 1rem;  background-color: {{headerColor}};"></div>
+
+      <ion-row id="publicatorResume" style="padding-left: 1.5rem; width: 100%;">
+        <ion-col>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Publicado Por</span>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3" style="display: flex; padding-left: 0; padding-right: 0; justify-content: center;">
+              <img (click)="openPerfil()"
+                  *ngIf="publicacion.publicador.imagen" 
+                  style="object-fit: cover; width: 5rem; height: 5rem; border-radius: 10px;" 
+                  [src]="getUrlImg(publicacion.publicador.imagen)">
+              <ion-icon *ngIf="!publicacion.publicador.imagen" style="color: var(--ion-color-beta); width: 5rem; height: 5rem;" name="person-circle"></ion-icon>  
+            </ion-col>
+            <ion-col size="9" style="display: flex; flex-direction: column; justify-content: center;">
+              <ion-row>
+                <p (click)="openPerfil()" style="font-weight: bold; font-size: 1.25rem; margin: 0 0 1rem 0;">{{publicacion.publicador.nombre}} {{publicacion.publicador.apellido}}</p>
+              </ion-row>
+              <ion-row>
+                <ion-badge color="success">Usuario</ion-badge>
+              </ion-row>
+            </ion-col>
+          
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-modal #modalI trigger="imagen_publicacion">
+        <ng-template>
+          <ion-content no-shadow>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+              <ion-toolbar style="position: absolute; top: 0">
+                <ion-buttons slot="end">
+                  <ion-button color="light" (click)="modalI.dismiss()">
+                    <ion-icon  style="color: white; height: 1.25rem;" name="close"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <img [src]="getUrlImg(publicacion.imagen)" style="transform: scale(.98);">
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+      <ion-modal #modalC trigger="contactar">
+        <ng-template>
+          <ion-content no-shadow>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 1rem">
+              <ion-toolbar style="background-color: rgba(255,255,255); border-radius: 1rem 1rem 0 0;">
+                <ion-title style="text-align: center; font-family: 'DM-SANS'; font-size: 1.5rem; font-weight: bold; color: rgba(0,0,0,.5);">Contacto</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button color="light" (click)="modalC.dismiss()">
+                    <ion-icon  style="color: black; height: 1.25rem;" name="close"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <div style="background-color: rgba(255,255,255); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0 0 1rem 1rem;">
+                <div id="contactos" style="width: 100%; padding-top: .5rem; padding-bottom: 1rem; ">
+                  <ion-row *ngIf="publicacion.publicador.instagram_visible" style="justify-content: center;">
+                    <ion-col size="3">
+                      <ion-icon  style="color: black; font-size: 1.3rem;" name="logo-instagram"></ion-icon>
+                    </ion-col>
+                    <ion-col size="8">
+                      <span style="font-size: 1.3rem; margin-left: 1rem;">
+                        {{publicacion.publicador.instagram}}
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row *ngIf="publicacion.publicador.telefono_visible" style="justify-content: center;">
+                    <ion-icon  style="color: black; font-size: 1.3rem;" name="logo-whatsapp"></ion-icon>
+                    <span style="font-size: 1.3rem;  margin-left: 1rem;">
+                      {{publicacion.publicador.telefono}}
+                    </span>
+                  </ion-row>
+
+                  <ion-row *ngIf="publicacion.publicador.email_visible" style="justify-content: center;">
+                    <ion-icon  style="color: black; font-size: 1.3rem;" name="mail-outline"></ion-icon>
+                    <span style="font-size: 1.3rem; margin-left: 1rem;">
+                      {{publicacion.publicador.email}}
+                    </span>
+                  </ion-row>
+
+                  <ion-row *ngIf="!publicacion.publicador.instagram_visible && !publicacion.publicador.telefono_visible && !publicacion.publicador.email_visible" style="justify-content: center; padding: 0 1rem 1rem 1rem;">
+                    <span style="font-size: 1.5rem; font-family: 'DM-Sans'; opacity: .5; margin: 0 1rem; text-align: center;">
+                      Desafortunadamente el usuario no ingreso un telefono de contacto
+                    </span>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+      
+      <div id="contactar" style="margin-top: 1rem; margin-bottom: 2rem; width: 90%;">
+        <ion-button *ngIf="tipoPublicacion == 1" style="width: 100%; height: 3rem; --background: var(--ion-color-perdidos); --border-radius: .35rem">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        </ion-button>
+
+        <ion-button *ngIf="tipoPublicacion == 2" style="width: 100%; height: 3rem; --background: var(--ion-color-encontrados); --border-radius: .35rem">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        </ion-button>
+
+        <ion-button *ngIf="tipoPublicacion == 3" style="width: 100%; height: 3rem; --background: var(--ion-color-adopcion); --border-radius: .35rem">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        </ion-button>
+
+        <ion-button *ngIf="tipoPublicacion == 4" style="width: 100%; height: 3rem; --background: var(--ion-color-transito); --border-radius: .35rem">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        </ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+

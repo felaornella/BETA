@@ -1,0 +1,75 @@
+<ion-content class="ion-padding" fullscreen>
+  <ion-row>
+    <ion-col size="10">
+        <ion-label style="margin-left: 1.3rem; margin-right:0.5rem;color: black;">Organizacion?  </ion-label>
+      <ion-toggle color="beta" style="vertical-align: middle;" [(ngModel)]="user.es_organizacion"></ion-toggle>
+    </ion-col>
+    
+  </ion-row>
+  <form id="register"  >
+    <ion-item lines="none">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" required [(ngModel)]="user.nombre" name="nombre" ></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion" >
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="user.descripcion_breve" name="descripcion_breve" rows="2" maxLength="350" style="caret-color: var(--ion-color-beta) !important; border-bottom:2px solid rgba(0,0,0,.7); opacity: 100%;"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!user.es_organizacion">
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input [(ngModel)]="user.apellido" name="apellido" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="user.email" name="email" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating">Ciudad</ion-label>
+      <ion-input [(ngModel)]="user.ciudad" name="ciudad" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="!user.es_organizacion">
+      <ion-label position="floating" style="transform : translateY(0%); -webkit-transform : translateY(0%)">Fecha de nacimiento</ion-label>
+      <ion-input [(ngModel)]="user.fecha_nacimiento" name="fecha_nacimiento" type="date" stlye="color: black!important" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating" style="transform : translateY(0%); -webkit-transform : translateY(0%)">Fecha de creacion</ion-label>
+      <ion-input [(ngModel)]="user.fecha_creacion" name="fecha_creacion" type="date" stlye="color: black!important" required></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input [(ngModel)]="user.telefono" name="telefono" type="text"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Instagram</ion-label>
+      <ion-input [(ngModel)]="user.instagram" name="instagram" type="text"></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating">DNI del Responsable</ion-label>
+      <ion-input [(ngModel)]="user.dni_responsable" name="dni_responsable" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating">Nombre del responsable</ion-label>
+      <ion-input [(ngModel)]="user.nombre_responsable" name="nombre_responsable" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating">Apellido del responsable</ion-label>
+      <ion-input [(ngModel)]="user.apellido_responsable" name="apellido_responsable" type="text" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="user.es_organizacion">
+      <ion-label position="floating">Link de donacion</ion-label>
+      <ion-input [(ngModel)]="user.link_donacion" name="link_donacion" type="text"></ion-input>
+    </ion-item>
+    <ion-item lines="none" >
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col class="ion-padding">
+        <ion-button type="submit" form="register" (click)="register()" color="beta" expand="block">Registrarse</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  
+ 
+  
+</ion-content>

@@ -1,0 +1,119 @@
+ion-content{
+    --background: var(--ion-color-background)
+}
+.nombreTitulo{
+    filter: drop-shadow(2px 4px 6px black);
+    font-size: 1.2rem;
+}
+.header-md::after {
+    display: none;
+}
+ion-tab-bar{
+    --background:transparent;
+    --border-color: transparent;
+}
+
+.typeButton{
+    --background-focused: rgba(0,0,0,.04);
+	--background-activated:rgba(0, 0, 0, 0.04);
+	--background-hover: rgba(0,0,0,.04);
+}
+ion-tab-button{
+    
+    --background: rgba(0,0,0,.15);
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: DM-Sans;
+    color: rgba(0,0,0,.3);
+}
+
+:host {
+    ion-tab-bar {
+        border: 0;
+   }
+}
+.white-grey {
+    background: linear-gradient(to right, var(--ion-color-background), rgba(255,255,255,0.74));
+}
+.grey-white {
+    background: linear-gradient(to left, var(--ion-color-background), rgba(250,250,255,0.74));
+}
+
+.background-user {
+   
+    justify-content: top;    
+    align-items: center;
+    background-color: var(--ion-color-beta);
+    height: auto;
+    
+}
+
+.background-association {
+    align-items: center;
+    background-color: var(--ion-color-asociation);
+    height: auto;
+}
+
+.image-profile {
+    padding: 0.5rem;
+    aspect-ratio: 1 / 1 ;
+    object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 12rem;
+    max-height: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 30px;
+}
+
+.col-left {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 0;
+    max-height: 100%;
+    max-width: auto;
+}
+
+.col-right {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0; max-height: 100%;
+    max-width: auto;
+}
+
+.col-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; max-height: 100%;
+    max-width: auto;
+}
+
+.name-user {
+    padding-bottom: 1rem;
+    font-weight: bolder;
+}
+
+
+.title {
+    font-family: DM-Sans;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: .5;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+
+
+ion-card {
+    box-shadow : none;
+    --color : black;
+    background: var(--ion-color-background)!important;
+}

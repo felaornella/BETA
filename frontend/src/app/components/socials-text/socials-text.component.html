@@ -1,0 +1,19 @@
+
+<ion-card *ngIf="emailVisible || phoneVisible || instagramVisible">
+  <ion-row>
+    <ion-label class="title">Contacto y Redes</ion-label>
+  </ion-row>
+  <ion-list lines="none">
+    <ion-item *ngIf="emailVisible">
+      <ion-label class="description"><ion-icon slot="start" mode="ios" name="mail-outline"></ion-icon> {{email}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="phoneVisible">
+      <ion-label class="description"><ion-icon slot="start" mode="ios" name="logo-whatsapp"> </ion-icon> {{phone}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="instagramVisible">
+      <ion-label class="description"><ion-icon  slot="start" name="logo-instagram"></ion-icon> {{instagram}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>  
+  
+

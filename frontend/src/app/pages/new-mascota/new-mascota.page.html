@@ -1,0 +1,212 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="mis-mascotas"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral">  
+  <ion-row style="display: flex; justify-content: center; align-items: center; height: 3rem; ">
+    <ion-col style="display: flex; flex-direction: column; align-items: center;">
+      <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem; color: black;"><b>Nueva Mascota</b></p>
+      <div style="margin: .35rem 0 0 0; height: 3px; width: 60% ;background-color: var(--ion-color-beta);"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-col style="padding: 0 1rem 1rem 1rem; display: block;">
+    <div id="tipoMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Tipo de Mascota *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-select [interfaceOptions]="{size: 'cover'}" interface="popover"
+                        placeholder="Tipo de Mascota" 
+                        [(ngModel)]="local_tipo_mascota_id"
+                        (ionChange)="obtenerRazasPorTipo()"
+                        interface="popover"
+                        style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                <ion-select-option *ngFor="let t of tipos" value="{{t.id}}">{{t.nombre}}</ion-select-option>
+                <!-- <ion-select-option value="2">Gato</ion-select-option> -->
+                <!-- <ion-select-option value="3">Otros</ion-select-option> -->
+            </ion-select>
+        </ion-row>
+    </div>
+    
+    <div id="nombreMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Nombre *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;" >
+            <ion-input placeholder="Nombre" [(ngModel)]="mascota.nombre"  style="border-bottom: 2px solid rgba(0,0,0,.7);"></ion-input>
+        </ion-row>
+    </div>
+
+    <div id="edadMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Fecha de Nacimiento *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-input placeholder="Fecha de Nacimiento" type="date"  [(ngModel)]="mascota.fecha_nacimiento" style="border-bottom: 2px solid rgba(0,0,0,.7);" id="fechaNac"></ion-input>
+        </ion-row>
+    </div>
+
+    <div id="razaMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Raza *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-select placeholder="Raza" interface="popover" [interfaceOptions]="{size: 'cover'}"  [(ngModel)]="local_raza_mascota_id" id = "selectRaza"
+                        style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                <ion-select-option *ngFor="let raza of razas" value="{{raza.id}}">{{raza.nombre}}</ion-select-option>
+            </ion-select>
+        </ion-row>
+    </div>
+
+    <div id="colorMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Color *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-select [interfaceOptions]="{size: 'cover'}" interface="popover"  placeholder="Colores" multiple="true" [(ngModel)]="mascota.colores" id="colores"
+                        style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                <ion-select-option *ngFor="let col of colores" value="{{col.nombre}}">{{col.nombre}}</ion-select-option>
+            </ion-select>
+        </ion-row>
+    </div>
+
+    <div id="tamaño_sexoMascotaDiv">
+        <ion-row>
+            <ion-col size="6" style="padding-left: 0">
+                <ion-row>
+                    <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Tamaño *</p>
+                </ion-row>
+                <ion-row style="margin-top: .5rem; width: 100%;">
+                    <ion-select placeholder="Tamaño" interface="popover" [interfaceOptions]="{size: 'cover'}"  [(ngModel)]="mascota.size" id="selectTamaño"
+                            style="width: 100%;border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                        <ion-select-option value="Pequeño">Pequeño</ion-select-option>
+                        <ion-select-option value="Mediano">Mediano</ion-select-option>
+                        <ion-select-option value="Grande">Grande</ion-select-option>
+                    </ion-select>
+                </ion-row>
+            </ion-col>
+            <ion-col size="6" style="padding-right: 0;">
+                <ion-row>
+                    <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Sexo *</p>
+                </ion-row>
+                <ion-row style="margin-top: .5rem; width: 100%;">
+                    <ion-select placeholder="Sexo" interface="popover" [interfaceOptions]="{size: 'cover'}"  [(ngModel)]="mascota.sexo"
+                            style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                        <ion-select-option  value="Macho" >Macho</ion-select-option>
+                        <ion-select-option  value="Hembra" >Hembra</ion-select-option>
+                    </ion-select>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div id="caracteristicaMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Descripción Extra</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-textarea rows="6" placeholder="Realice una descripcion breve..." maxLength="350" [(ngModel)]="mascota.caracteristicas"
+                          style="border: 2px solid rgba(0,0,0,.7); border-radius: .25rem; margin-top: 0;"
+            ></ion-textarea>
+        </ion-row>
+    </div>
+
+    <div id="imagenMascotaDiv">
+        <ion-row>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Adjuntar Imagen *</p>
+        </ion-row>
+        <ion-row style="margin-top: .5rem;">
+            <ion-col size="6" style="padding-left: 0;">
+                <input  (change)="placeName()" type="file" accept="image/jpeg" id="imagen_mascota" hidden>
+                
+                <ion-button (click)="open_file_selector()" fill="outline" style="width: 100%; --padding-start:0; --padding-end:0; margin-top: 0; --color:#ba8f20; --border-color:#ba8f20" >
+                    <span style="font-family: DM-Sans; font-weight: bold; margin-right: .5rem;">Galeria</span>
+                    <ion-icon  name="folder-outline" style="height: 1rem;"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="3" style="text-align: center;">
+              <img id="previewImg" style="max-height: 5rem;" src="">
+            </ion-col>
+            <ion-col size="9">
+              <p style="height: 100%; margin: 0; display: flex; flex-direction: column; justify-content: center;" id="nombreImg"></p>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div id="descripcionMedicaDiv">
+        <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0;">Descripción Medica</p>
+        <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
+            <ion-row style="margin-top: 1rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">Castración *</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+                <ion-select placeholder="Seleccione una opción" interface="popover" [interfaceOptions]="{size: 'cover'}"  [(ngModel)]="local_castracion" id="selectCastracion"
+                            style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                    <ion-select-option value="false">Sin castrar</ion-select-option>
+                    <ion-select-option value="true">Castracion realizada</ion-select-option>
+                </ion-select>
+            </ion-row>
+
+            <ion-row style="margin-top: 1rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">Vacunación *</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+                <ion-select placeholder="Seleccione una opción" interface="popover" [interfaceOptions]="{size: 'cover'}"  [(ngModel)]="mascota.vacunacion"
+                            style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
+                    <ion-select-option value="Sin vacunar">Sin vacunar</ion-select-option>
+                    <ion-select-option value="En progreso">En progreso</ion-select-option>
+                    <ion-select-option value="Completa">Completa</ion-select-option>
+                </ion-select>
+            </ion-row>
+
+            <ion-row style="margin-top: 1rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">Patologias o problemas extras</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+                <ion-textarea rows="6" placeholder="Ingrese cualquier patologia, problema o tratamiento en curso aqui..." maxLength="500" [(ngModel)]="mascota.enfermedades"
+                              style="border: 2px solid rgba(0,0,0,.7); border-radius: .25rem; margin-top: 0;"
+                ></ion-textarea>
+            </ion-row>
+
+            <ion-row style="margin-top: 1rem;">
+              <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">Cirugias</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+                <ion-textarea rows="6" placeholder="Ingrese cualquier cirugia que se haya realizado..." maxLength="500" [(ngModel)]="mascota.cirugias"
+                              style="border: 2px solid rgba(0,0,0,.7); border-radius: .25rem; margin-top: 0;"
+                ></ion-textarea>
+            </ion-row>
+
+            <ion-row style="margin-top: 1rem;">
+              <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">Medicamentos</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+                <ion-textarea rows="6" placeholder="Ingrese cualquier medicacion recetada aqui..." maxLength="500" [(ngModel)]="mascota.medicacion"
+                              style="border: 2px solid rgba(0,0,0,.7); border-radius: .25rem; margin-top: 0;"
+                ></ion-textarea>
+            </ion-row>
+        </ion-col>
+
+    </div>
+
+    <div id="botonPublicarDiv" style="margin-top: 1rem; margin-bottom: 2rem;">
+        <ion-button style="width: 100%; height: 3rem; --background: var(--ion-color-beta); --border-radius: .25rem" (click)="enviarMascota()">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Agregar </span>
+        </ion-button>
+    </div>
+  </ion-col>
+
+</ion-content>
+

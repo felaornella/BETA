@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-button  (click)="misMascotas()" fill="clear">
+        <ion-icon slot="icon-only" color="light" [name]="isLoggedIn() ? 'paw' : 'paw-outline'" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+
+    
+    <ion-button slot="end" (click)="miPerfil()" fill="clear">
+      <ion-icon slot="icon-only" color="light" [name]="isLoggedIn() ? 'person' : 'person-outline'"></ion-icon>
+    </ion-button>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral">
+
+  <ion-row style="display: flex; justify-content: center; align-items: center; padding-top: 3.5rem; padding-bottom: 3.5rem;">
+    <ion-button id="nuevaPublicacion" fill="outline" (click)="newPost()">
+      <ion-col style="margin-right: 1rem;">
+        <ion-icon name="add-circle" style="height: 5rem; width: 5rem;"></ion-icon> 
+      </ion-col>
+      <ion-col style="font-size: 1.4rem; font-weight: 600; text-transform: none; font-family: DM-Sans;">
+        <p style="margin-bottom: 0.5rem;">Nueva</p>
+        <p style="margin-top: 0.5rem;">Publicación</p>
+      </ion-col>
+    </ion-button>
+  </ion-row>
+
+  
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-row class="ion-justify-content-center">
+          <ion-col style="display: flex; justify-content: right; padding-right: 1rem;">
+            <ion-button class="btnMenuHome" id="btnMenuHomePerEnc" (click)="homePerdidosEncontrados()">
+              <ion-col style="display:flex;flex-direction: column;align-items: center; justify-content: center; padding:0">
+                <ion-row style="margin-bottom: .8rem;">
+                  <ion-icon name="warning" style="height: 3rem; width: 3rem;"></ion-icon> 
+                </ion-row>
+                <ion-row style="margin-top: .25rem; text-align: center;">
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0; text-align: center; width: 100%;">Perdidos y</p>
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0; margin-top: .5rem; text-align: center; width: 100%;">Encontrados</p>
+                </ion-row>
+              </ion-col>
+            </ion-button>
+          </ion-col>
+          <ion-col style="display: flex; justify-content: left; padding-left: 1rem;">
+            <ion-button class="btnMenuHome" id="btnMenuHomeMap" (click)="openMap()">
+              <ion-col style="display:flex;flex-direction: column;align-items: center; justify-content: center; padding:0">
+                <ion-row style="margin-bottom: .8rem;">
+                  <ion-icon name="map" style="height: 3rem; width: 3rem;"></ion-icon> 
+                </ion-row>
+                <ion-row style="margin-top: .25rem; text-align: center;">
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0">Mapa</p>
+                </ion-row>
+              </ion-col>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row style="margin-top: 1rem;">
+          <ion-col style="display: flex; justify-content: right; padding-right: 1rem;">
+            <ion-button  (click)="homeAdopcionTransito()" class="btnMenuHome" id="btnMenuHomeAdopTran">
+              <ion-col style="display:flex;flex-direction: column;align-items: center; justify-content: center; padding:0">
+                <ion-row style="margin-bottom: .8rem;">
+                  <ion-icon name="heart" style="height: 3rem; width: 3rem;"></ion-icon> 
+                </ion-row>
+                <ion-row style="margin-top: .25rem; text-align: center;">
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0;text-align: center; width: 100%;">Adopción y</p>
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0; margin-top: .5rem; text-align: center; width: 100%;">Tránsito</p>
+                </ion-row>
+              </ion-col>
+            </ion-button>
+          </ion-col>
+          <ion-col style="display: flex; justify-content: left; padding-left: 1rem;">
+            <ion-button (click)="agrupaciones()" class="btnMenuHome" id="btnMenuHomeAgru">
+              <ion-col style="display:flex;flex-direction: column;align-items: center; justify-content: center; padding:0">
+                <ion-row style="margin-bottom: .8rem;">
+                  <ion-icon name="people" style="height: 3rem; width: 3rem;"></ion-icon> 
+                </ion-row>
+                <ion-row style="margin-top: .25rem; text-align: center;">
+                  <p style="color:white; text-transform: none; font-size: 1.1rem;font-family: DM-Sans; font-weight:Bold; margin:0">Agrupaciones</p>
+                </ion-row>
+              </ion-col>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="padding-top: 1rem;">
+      <ion-col>
+        <p style="width: 100%; text-align: center; opacity: .3; font-weight: 600;color: black;">Felipe Ornella y Nahuel Bigurrarena</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-modal id="modalLogin" #modalLI>
+      <ng-template>
+        <ion-content no-shadow>
+          <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <div style="text-align: center;background-color: white;margin: 1.5rem;border-radius: .5rem; padding: 1rem 1rem 0 1rem;">
+              <p style="color: rgba(0,0,0,.85);font-family: DM-SANS;text-align: center;font-size: 2rem;margin-left: 2rem;margin-right: 2rem;font-weight: 600;margin-bottom: 0;margin: 0 2rem;">Oops...</p>
+              <p style="color: rgba(0,0,0,.65);font-family: DM-SANS;text-align: center;font-size: 1.25rem;font-weight: 600;margin-bottom: 0;margin-top: .5rem;margin-bottom: 0;">Debes iniciar sesión para poder continuar a este apartado</p>
+
+              <ion-row>
+                <ion-col size="6">
+                  <ion-button style="width: 100%;height: 3rem; --border-radius: .5rem; --border-color: var(--ion-color-beta);color: var(--ion-color-beta);margin-bottom: 1rem; margin-top: 1rem;" fill="outline" (click)="modalLI.dismiss()">
+                    <span style="font-size: 1rem; font-family: DM-Sans; text-transform: none; font-weight: 600; "> CANCELAR </span>
+                  </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button style="width: 100%;height: 3rem; --border-radius: .5rem; --background:var(--ion-color-beta);color: white;margin-bottom: 1rem; margin-top: 1rem;" fill="solid" (click)="login()">
+                    <span style="font-size: 1rem; font-family: DM-Sans; text-transform: none; font-weight: 600; "> INICIAR SESION </span>
+                  </ion-button>
+                </ion-col>
+              </ion-row> 
+            </div>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  
+</ion-content>
+
+<ion-footer hidden>
+  <ion-router-outlet id="principal" style="width: 0px; height: 0px"></ion-router-outlet>
+</ion-footer>
+

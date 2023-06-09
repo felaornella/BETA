@@ -1,0 +1,38 @@
+#modalImagen, #modalEliminar {
+    --background: transparent;
+    // --height: 75%;
+    width: 100%;
+    --box-shadow: none;
+    --backdrop-opacity: .75
+
+}
+
+#modalQR {
+    --background: rgba(var(--ion-color-beta-rgb),1);
+    // --height: 75%;
+    width: 100%;
+    --box-shadow: none;
+    --backdrop-opacity: .75
+
+}
+  
+ion-modal::part(backdrop) {
+    background: rgb(0,0,0);
+    opacity: .75;
+}
+
+
+ion-modal ion-content{
+    --background: transparent;
+}
+
+ion-modal ion-toolbar {
+    --background: transparent;
+    --color: white;
+    --height: 2rem
+}
+
+ion-modal img{
+    max-height: 100%;
+    width: 100%;
+}

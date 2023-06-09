@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      
+      <ion-button color="light" (click)="cancel()">
+        <ion-icon slot="icon-only" color="light" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" style="max-height: 3rem;">
+    </ion-title>
+    
+      <ion-buttons slot="end">
+        <div [ngIf]="editable === true">
+                <ion-button color="light" (click)="confirm()">{{confirmText}}</ion-button>
+        </div>
+      </ion-buttons>
+    
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="map2" style="z-index: 1;"></div>
+</ion-content>

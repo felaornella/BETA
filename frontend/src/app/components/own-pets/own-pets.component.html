@@ -1,0 +1,10 @@
+<ion-card *ngIf="ownPets?.length > 0">
+  <ion-row>
+    <ion-label class="title">Mascotas</ion-label>
+  </ion-row>
+  <ion-list lines="none">
+    <ion-item *ngFor="let pet of ownPets">
+      <ion-label class="description"><ion-icon slot="start" name="paw"></ion-icon>{{pet.nombre}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>

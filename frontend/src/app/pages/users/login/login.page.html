@@ -1,0 +1,47 @@
+<ion-content class="ion-padding" fullscreen>
+  <form id="login">
+    <ion-item  lines="none">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" name="email" type="email" required  ></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+    </ion-item>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/users/forgot-password']">Olvidaste tu contraseña?</a>
+      </ion-col>
+    </ion-row>
+  </form>
+  
+  <ion-row style="display: flex; justify-content: center; align-items: center;" *ngIf="show_mensaje_error">
+    <ion-col style="display: flex; flex-direction: column; align-items: center; padding-left: 1rem; padding-right: 1rem;">
+      <p style="opacity: .65; font-family: 'DM Sans'; color:red; font-size: .9rem; margin-top: 0;">- {{mensaje_error}} -</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="ion-padding">
+      <ion-button (click)="jumpToHome()" type="submit" form="login" color="beta" expand="block"><ion-text color="light">Iniciar sesion</ion-text></ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row>
+    <ion-col class="ion-padding">
+      <span class="d-block text-center my-4 text-muted">— o —</span>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center>
+    <ion-col class="ion-padding">
+      <ion-button type="button" expand="block" id="googleLogin">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+        Iniciar sesion con Google
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  
+  
+  
+</ion-content>

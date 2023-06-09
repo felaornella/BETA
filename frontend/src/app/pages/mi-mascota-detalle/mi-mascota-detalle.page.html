@@ -1,0 +1,235 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="mis-mascotas"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+  
+  
+    <ion-button slot="end" (click)="presentMenu($event)" fill="clear" stlye="--color:white!important;">
+      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical" color="light" ></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral">  
+  <ion-row>
+    <ion-col style="display: flex; flex-direction: column; align-items: center; padding: 0; background-color: var(--ion-color-background);">
+      <ion-row style="display: flex; justify-content: center; align-items: center; height: 3rem; width: 100%; ">
+        <ion-col style="display: flex; flex-direction: column; align-items: center; ">
+          <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem; color: black;"><b>Mis Mascotas - {{mascota.nombre}}</b></p>
+          <div style="margin: .35rem 0 0 0; height: 3px; width: 60% ;background-color: var(--ion-color-beta);"></div>
+        </ion-col>
+      </ion-row>
+      <img 
+        id="imagen_publicacion"
+        style="object-fit: cover; width: 100%; height: 20rem;"
+        [src]="getUrlImg(mascota.imagen)">
+
+
+      <div>
+        <p style="text-transform: uppercase; font-family: DM-Sans; font-size: 1.35rem; margin: 1rem 0 .5rem 0; color: rgba(125,125,125,.8); font-weight: 600;">{{mascota.tipo_mascota}}</p>
+      </div>
+      
+      <ion-row style="padding-left: 1.5rem; width: 100%;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Nombre</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.nombre}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Edad</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.edad}} {{mascota.edad_unidad}}</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Sexo</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.sexo}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Raza</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.raza_mascota}}</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Color</span>
+          </ion-row>
+          <ion-row>
+            <span *ngIf="mascota.colores" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.colores.join(", ")}}</span>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Tamaño</span>
+          </ion-row>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.size}}</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col>
+          <ion-row>
+            <span style="font-family: DM-Sans; font-size: 1rem; opacity: .6; font-weight: 600;max-width: 100%;">Descripcion extra</span>
+          </ion-row>
+          <ion-row>
+            <span *ngIf="mascota.caracteristicas" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">{{mascota.caracteristicas}}</span>
+            <span *ngIf="!mascota.caracteristicas" style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.5rem;max-width: 100%;">---</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+        <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0; margin-left: -.75rem;">Descripción Medica</p>
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0; margin-top: 0;">Castración</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="mascota.castracion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">Si</span>
+              <span *ngIf="!mascota.castracion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0; margin-top: 0;">Vacunación</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{mascota.vacunacion}}</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+                <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0;">Patologias o problemas extras</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="mascota.enfermedades" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{mascota.enfermedades}}</span>
+              <span *ngIf="!mascota.enfermedades" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+              <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0;">Cirugias</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="mascota.cirugias" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{mascota.cirugias}}</span>
+              <span *ngIf="!mascota.cirugias" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+
+            <ion-row style="margin-top: .25rem;">
+              <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .6; margin-bottom: 0;">Medicaciones</p>
+            </ion-row>
+            <ion-row style="margin-top: .5rem;">
+              <span *ngIf="mascota.medicacion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">{{mascota.medicacion}}</span>
+              <span *ngIf="!mascota.medicacion" style="font-family: DM-Sans; padding-left:1rem; font-weight: 600;max-width: 100%; font-size:1.25rem;max-width: 100%;">No</span>
+            </ion-row>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-modal id="modalImagen" #modalI trigger="imagen_publicacion">
+        <ng-template>
+          <ion-content no-shadow>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+              <ion-toolbar>
+                <ion-buttons slot="end">
+                  <ion-button color="light" (click)="modalI.dismiss()">
+                    <ion-icon  style="color: white; height: 1.25rem;" name="close"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <img [src]="getUrlImg(mascota.imagen)" style="margin-bottom: 3rem">
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+      
+      <ion-row style="margin-top: 1rem; width: 100%; padding: 0 5%; margin-bottom: 1rem;">
+        <ion-col size="6">
+          <ion-button style="width: 100%; height: 3rem;  --border-radius: .5rem; --border-color: var(--ion-color-beta); color: var(--ion-color-beta);" fill="outline" (click)="obtenerQRMascota()" id="qr-perfil">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> QR </span>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button style="width: 100%; height: 3rem;  --border-radius: .5rem; --border-color: var(--ion-color-beta); color: var(--ion-color-beta);" fill="outline" (click)="mostrarQRNewOwner()" id="qr-new-owner">
+            <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Añadir Dueño </span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-modal id="modalQR" #modalQ trigger="qr-new-owner">
+        <ng-template>
+          <ion-content no-shadow>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+              <ion-toolbar>
+                <ion-buttons slot="end">
+                  <ion-button color="light" (click)="modalQ.dismiss()">
+                    <ion-icon  style="color: white; height: 1.25rem;" name="close"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+              <div style="text-align: center;">
+                <img id="imgQRNewOwner" src="" style="margin-bottom: 3rem; filter: drop-shadow(2px 4px 6px black); width: 85%;">
+              </div>
+              <p style="color: white; font-family: 'DM-SANS'; text-align: center; font-size: 1.1rem; margin-left: 2rem; margin-right: 2rem;">Escanee el QR en pantalla desde la cuenta del nuevo dueño.<br><br>Mis Mascotas > Añadir Mascota > Escanear QR</p>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+      <ion-modal id="modalEliminar" #modalE [isOpen]="isOpenModalDelete">
+        <ng-template>
+          <ion-content no-shadow>
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem;">
+              <div style="text-align: center;background-color: white;margin: 1.5rem;border-radius: .5rem; padding: 1.25rem;">
+                <p style="color: rgba(0,0,0,.85);font-family: DM-SANS;text-align: center;font-size: 1.5rem;font-weight: 600;margin: 0 2rem 1rem 2rem;">¿Esta seguro?</p>
+                <p style="color: rgba(0,0,0,.85);font-family: DM-SANS;text-align: center;font-size: 1rem;margin: 0 2rem 1rem 2rem;">¿Esta seguro que deseas eliminar esta mascota?</p>
+    
+                <ion-row style="margin-top: 1rem;  width: 100%; padding: 0 5%;">
+                  <ion-col size="6">
+                    <ion-button style="width: 100%; height: 3rem;  --border-radius: .5rem; --border-color: var(--ion-color-beta); color: var(--ion-color-beta);" fill="outline" (click)="modalE.dismiss()">
+                        <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Cancelar </span>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-button style="width: 100%; height: 3rem; --background: red; --border-radius: .5rem" (click)="eliminar()">
+                        <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Eliminar </span>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+      
+
+      
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="icon-only" style="color: white" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral">  
+  <ion-row style="display: flex; justify-content: center; align-items: center; height: 3rem; ">
+    <ion-col style="display: flex; flex-direction: column; align-items: center;">
+      <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem; color: black;"><b>Nueva Publicación</b></p>
+      <div style="margin: .35rem 0 0 0; height: 3px; width: 60% ;background-color: var(--ion-color-beta);"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col style="display: flex; flex-direction: column; align-items: center; margin-top: 1rem;">
+      <div style="margin-bottom: 1rem;">
+        <p style="width: 100%; text-align: center; opacity: .3; font-weight: 600; font-size: 1rem; color: black;">Seleccione un tipo de publicación</p>
+      </div>
+
+      <div style="width: 90%">
+
+        <ion-button (click)="publicacionPerdido()" style="width: 100%;--background: var(--ion-color-perdidos); height: 22%;
+                          margin-bottom: 2rem; --border-radius: .5rem; --padding-start:0; text-transform: none;">
+          <ion-col size="3">
+            <ion-icon style="color: white;" size="large" name="search"></ion-icon>
+          </ion-col>
+          <ion-col size="9" style="padding: 0; text-align: left;">
+            <span style="font-size: 1.2rem;">Perdí mi Mascota</span>
+          </ion-col>
+        </ion-button>
+
+        <ion-button (click)="publicacionEncontrado()" style="width: 100%; --background: var(--ion-color-encontrados); height: 22%;
+                          margin-bottom: 2rem; --border-radius: .5rem; --padding-start:0; text-transform: none;">
+          <ion-col size="3">
+            <ion-icon style="color: white;" size="large" name="warning"></ion-icon>
+          </ion-col>
+          <ion-col size="9" style="padding: 0; text-align: left;">
+            <span style="font-size: 1.2rem;">Encontré una Mascota</span>
+          </ion-col>
+        </ion-button>
+
+        <ion-button (click)="publicacionAdopcion()" style="width: 100%; --background: var(--ion-color-adopcion); height: 22%;
+                          margin-bottom: 2rem; --border-radius: .5rem; --padding-start:0; text-transform: none;">
+          <ion-col size="3">
+            <ion-icon style="color: white;" size="large" name="heart"></ion-icon>
+          </ion-col>
+          <ion-col size="9" style="padding: 0; text-align: left;">
+            <span style="font-size: 1.2rem;">Adopción de Mascota</span>
+          </ion-col>
+        </ion-button>
+
+        <ion-button (click)="publicacionTransito()" style="width: 100%; --background: var(--ion-color-transito); height: 22%;
+                          margin-bottom: 2rem; --border-radius: .5rem; --padding-start:0; text-transform: none;">
+          <ion-col size="3">
+            <ion-icon style="color: white;" size="large" name="home"></ion-icon>
+          </ion-col>
+          <ion-col size="9" style="padding: 0; text-align: left;">
+            <span style="font-size: 1.2rem;">Tránsito de Mascota</span>
+          </ion-col>
+        </ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-modal id="modalLogin" #modalLI>
+    <ng-template>
+      <ion-content no-shadow>
+        <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+          <div style="text-align: center;background-color: white;margin: 1.5rem;border-radius: .5rem; padding: 1rem 1rem 0 1rem;">
+            <p style="color: rgba(0,0,0,.85);font-family: DM-SANS;text-align: center;font-size: 2rem;margin-left: 2rem;margin-right: 2rem;font-weight: 600;margin-bottom: 0;margin: 0 2rem;">Oops...</p>
+            <p style="color: rgba(0,0,0,.65);font-family: DM-SANS;text-align: center;font-size: 1.25rem;font-weight: 600;margin-bottom: 0;margin-top: .5rem;margin-bottom: 0;">Debes iniciar sesión para poder continuar a este apartado</p>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-button style="width: 100%;height: 3rem; --border-radius: .5rem; --border-color: var(--ion-color-beta);color: var(--ion-color-beta);margin-bottom: 1rem; margin-top: 1rem;" fill="outline" (click)="modalLI.dismiss()">
+                  <span style="font-size: 1rem; font-family: DM-Sans; text-transform: none; font-weight: 600; "> CANCELAR </span>
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button style="width: 100%;height: 3rem; --border-radius: .5rem; --background:var(--ion-color-beta);color: white;margin-bottom: 1rem; margin-top: 1rem;" fill="solid" (click)="login()">
+                  <span style="font-size: 1rem; font-family: DM-Sans; text-transform: none; font-weight: 600; "> INICIAR SESION </span>
+                </ion-button>
+              </ion-col>
+            </ion-row> 
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+

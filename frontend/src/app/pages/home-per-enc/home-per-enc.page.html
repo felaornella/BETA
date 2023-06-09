@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-toolbar color="beta">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <img src="assets/logo_con_nombre_derecha.png" class="logo-navbar">
+    </ion-title>
+    
+    
+    <ion-button slot="end" (click)="toggleMenu()" fill="clear">
+      <ion-icon slot="icon-only" style="color: white;" name="options"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentGeneral">
+  <ion-toolbar id="switches" style="position:fixed; height: 3.5rem;">
+    <ion-row>
+      <ion-col size="6">
+        <ion-row style="display: flex; justify-content: center; align-items: center; margin:0">
+          <ion-toggle disabled="{{!togglesActivados}}" (click)="togglePerdidos()" color="perdidos" style="margin: 0; padding-left: 0;" checked></ion-toggle> <span style="font-weight: 600; font-family: DM-Sans; color: var(--ion-color-perdidos);">Perdidos</span>
+        </ion-row>
+      </ion-col>
+      <ion-col size="6">
+        <ion-row style="display: flex; justify-content: center; align-items: center; margin:0">
+          <ion-toggle disabled="{{!togglesActivados}}" (click)="toggleEncontrados()" color="encontrados" checked style="margin: 0; padding-left: 0;"></ion-toggle> <span style="font-weight: 600; font-family: DM-Sans; color: var(--ion-color-encontrados);">Encontrados</span>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-refresher id="refresher" slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row [style]="(!publicaciones || publicaciones?.length == 0) ?  'margin-top: 90%;' : ''" >
+    <ion-col *ngIf="!publicaciones"  style="display: flex; flex-direction: column; align-items: center;">
+      <ion-item  id="spinnerCarga" style="transform: scale(2); --inner-border-width:0; --background:transparent">
+        <ion-spinner color="beta" name="circular"></ion-spinner>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12" *ngIf="publicaciones?.length == 0">
+      <ion-item  style="text-align: center; --background: transparent; --inner-border-width: 0; --border-width: 0; --inner-padding-end: 0; --inner-padding-start: 0;">
+        <ion-label *ngIf="!fallo" style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3;">Aun no hay publicaciones</ion-label>
+        <ion-label *ngIf="fallo" style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3;">No se pudieron obtener publicaciones</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <div style="overflow: scroll; margin-top: 3.5rem; padding: 0 .5rem 1rem .5rem">
+    <app-publication-item *ngFor="let publi of publicaciones" (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
+  </div>
+  
+</ion-content>
+
+<ion-menu side="end"
+    menuId="filters_per_enc"
+    contentId="principal">
+    <ion-header>
+      <ion-toolbar color="beta" style="border-bottom: 1.5px solid white;">
+        <ion-title style="font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; color: white;">
+          Filtros de Busqueda
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  <ion-content color="beta">
+    
+    
+    <ion-list style="background:transparent; padding-left: .5rem;">
+      <ion-item style="--background:transparent; margin-bottom: .5rem;">
+        <ion-col style="margin: 0; padding: 0;">
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Distancia a la redonda</span><span style="margin-left: .25rem; color: white; font-size: .8rem;">(km)</span>
+          <ion-range [dualKnobs]="true"  [value]="filtro.distancia" [(ngModel)]="filtro.distancia" [max]="25"></ion-range>
+          <ion-row style="margin-bottom: .5rem;">
+            <ion-col size="6" style="padding: 0;">
+              <span style="margin-left: .25rem; color: white; font-size: .8rem;">Min: {{filtro.distancia.lower}}</span><br>
+            </ion-col>
+            <ion-col size="6" style="padding: 0;">
+              <span style="margin-left: .25rem; color: white; font-size: .8rem;">Max: {{filtro.distancia.upper}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-item>
+
+      <ion-item style="--background:transparent; margin-bottom: .5rem; margin-left: -1rem;">
+        <ion-row style="width: 100%; margin-left: 1rem;">
+          <ion-col size="6" style="margin: 0; padding: 0; height: 100%;margin-bottom: .5rem;">
+            <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Tipo</span>
+            <ion-item style="--background:transparent; --border-color:transparent; --padding-start:0; --padding-top:.5rem; min-height: fit-content;  height: 2rem; display: flex; align-items: center;">
+              <ion-checkbox style="margin: 0; width: .85rem; height: .85rem; --background:rgba(0,0,0,.4); " slot="start" checked [(ngModel)]="filtro.tipo[1]" (ionChange)="cambioTipos($event)"></ion-checkbox>
+              <ion-label style="margin: 0 0 0 .25rem; color: white;">Perro</ion-label>
+            </ion-item>
+            <ion-item style="--background:transparent; --border-color:transparent; --padding-start:0; --padding-top:.5rem; min-height: fit-content;  height: 2rem; display: flex; align-items: center;">
+              <ion-checkbox style="margin: 0; width: .85rem; height: .85rem; --background:rgba(0,0,0,.4); " slot="start" checked [(ngModel)]="filtro.tipo[2]" (ionChange)="cambioTipos($event)"></ion-checkbox>
+              <ion-label style="margin: 0 0 0 .25rem; color: white;">Gato</ion-label>
+            </ion-item>
+            <ion-item style="--background:transparent; --border-color:transparent; --padding-start:0; --padding-top:.5rem; min-height: fit-content;  height: 2rem; display: flex; align-items: center;">
+              <ion-checkbox style="margin: 0; width: .85rem; height: .85rem; --background:rgba(0,0,0,.4); " slot="start" checked [(ngModel)]="filtro.tipo[3]" (ionChange)="cambioTipos($event)"></ion-checkbox>
+              <ion-label style="margin: 0 0 0 .25rem; color: white;">Otro</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6" style="margin: 0; padding: 0;height: 100%; margin-bottom: .5rem;">
+            <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Sexo</span>
+            
+            <ion-item style="--background:transparent; --border-color:transparent; --padding-start:0; --padding-top:.5rem; min-height: fit-content;  height: 2rem; display: flex; align-items: center;">
+              <ion-checkbox style="margin: 0; width: .85rem; height: .85rem; --background:rgba(0,0,0,.4); " slot="start" checked [(ngModel)]="filtro.sexo.macho"></ion-checkbox>
+              <ion-label style="margin: 0 0 0 .25rem; color: white;">Macho</ion-label>
+            </ion-item>
+            <ion-item style="--background:transparent; --border-color:transparent; --padding-start:0; --padding-top:.5rem; min-height: fit-content;  height: 2rem; display: flex; align-items: center;">
+              <ion-checkbox style="margin: 0; width: .85rem; height: .85rem; --background:rgba(0,0,0,.4); " slot="start" checked [(ngModel)]="filtro.sexo.hembra"></ion-checkbox>
+              <ion-label style="margin: 0 0 0 .25rem; color: white;">Hembra</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+      <ion-item style="--background:transparent; margin-bottom: .5rem;">
+        <ion-col style="margin: 0; padding: 0;">
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Raza</span>
+          <ion-item style="--background:transparent; --border-color:white; --border-width:2px; --border-radius:.25rem; margin-bottom: .5rem; margin-top: .25rem;  ">
+            <ion-select  interface="popover"   placeholder="Todas las razas" style="width: 100%; --placeholder-color: white; --placeholder-opacity:1; color:white"  multiple="true"  [(ngModel)]="filtro.raza">
+              <ion-select-option *ngFor="let raz of razas" value="{{raz.id}}">{{raz.nombre}} - {{tipos[raz.tipo_mascota_id]}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
+        </ion-col>
+      </ion-item>
+
+      <ion-item style="--background:transparent; margin-bottom: .5rem;">
+        <ion-col style="margin: 0; padding: 0;">
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Color</span>
+          <ion-item style="--background:transparent; --border-color:white; --border-width:2px; --border-radius:.25rem; margin-bottom: .5rem; margin-top: .25rem;  ">
+            <ion-select interface="popover" placeholder="Todos los colores" style="width: 100%; --placeholder-color: white; --placeholder-opacity:1; color:white" multiple="true" checked [(ngModel)]="filtro.colores">
+              <ion-select-option *ngFor="let col of colores" value="{{col.nombre}}">{{col.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
+        </ion-col>
+      </ion-item>
+
+      <ion-item style="--background:transparent; margin-bottom: .5rem;">
+        <ion-col style="margin: 0; padding: 0;">
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Tamaño</span>
+          <ion-item style="--background:transparent; --border-color:white; --border-width:2px; --border-radius:.25rem; margin-bottom: .5rem; margin-top: .25rem;  ">
+            <ion-select   interface="popover"  placeholder="Todos los tamaños" style="width: 100%; --placeholder-color: white; --placeholder-opacity:1; color:white"  multiple="true"  checked [(ngModel)]="filtro.size">
+              <ion-select-option value="Pequeño">Pequeño</ion-select-option>
+              <ion-select-option value="Mediano">Mediano</ion-select-option>
+              <ion-select-option value="Grande">Grande</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
+        </ion-col>
+      </ion-item>
+
+      <ion-item style="--background:transparent; --border-color:transparent; margin-bottom: .5rem;">
+        <ion-col style="margin: 0; padding: 0;">
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Edad</span>
+          <ion-item style="--background:transparent; --border-color:white; --border-width:2px; --border-radius:.25rem; margin-bottom: .5rem; margin-top: .25rem;  ">
+            <ion-select  interface="popover"  placeholder="Todas las edades" style="width: 100%; --placeholder-color: white; --placeholder-opacity:1; color:white" multiple="true"  checked [(ngModel)]="filtro.edad">
+              <ion-select-option  value="1">Menos de 1 año</ion-select-option>
+              <ion-select-option  value="2">1 a 3 años</ion-select-option>
+              <ion-select-option  value="3">4 a 6 años</ion-select-option>
+              <ion-select-option  value="4">7 a 9 años</ion-select-option>
+              <ion-select-option  value="5">Más de 10 años</ion-select-option>
+            </ion-select>
+          </ion-item>
+          
+        </ion-col>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+  <ion-footer style="background: #28BA62;">
+    <ion-item style="--background:transparent; --border-color:transparent; --color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 400; --text-align: right;">
+      <ion-row style="margin: 0; padding: 0; width: 100%;">
+        <ion-col size="6">
+          <ion-button (click)="toggleMenu()" fill="outline" style="width: 100%; height: 2rem; color: white; --border-color:white">
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button (click)="applyFilters()" style="width: 100%; height: 2rem;">
+            Filtrar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-footer>
+</ion-menu>
+<ion-footer hidden>
+  <ion-router-outlet id="principal" style="width: 0px; height: 0px"></ion-router-outlet>
+</ion-footer>
+  
+

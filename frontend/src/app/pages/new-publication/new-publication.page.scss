@@ -1,0 +1,159 @@
+ion-content{
+    --background: var(--ion-color-background)
+}
+ion-tab-bar{
+    --background:transparent;
+    --border-color: transparent;
+}
+ion-tab-button{
+    --background: rgba(0,0,0,.15);
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: DM-Sans;
+    color: rgba(0,0,0,.3);
+}
+
+:host {
+    ion-tab-bar {
+        border: 0;
+   }
+}
+
+.tab-selected{
+    background: transparent;
+    color: black;
+    border-color: transparent;
+}
+
+.not-selected{
+    background-color: var(--ion-color-beta); 
+    margin: .5rem; 
+    border-radius: .5rem; 
+    min-height: 15rem;
+    max-height: 18rem; 
+    overflow: hidden; 
+    width: 90%; 
+}
+
+.selected-Per{
+    background-color: var(--ion-color-beta); 
+    margin: .5rem; 
+    border-radius: .5rem; 
+    min-height: 15rem;
+    max-height: 18rem; 
+    overflow: hidden; 
+    width: 90%; 
+    border: .5rem solid var(--ion-color-perdidos)
+}
+
+.selected-Enc{
+    background-color: var(--ion-color-beta); 
+    margin: .5rem; 
+    border-radius: .5rem; 
+    min-height: 15rem;
+    max-height: 18rem; 
+    overflow: hidden; 
+    width: 90%; 
+    border: .5rem solid var(--ion-color-encontrados)
+}
+
+.selected-Ado{
+    background-color: var(--ion-color-beta); 
+    margin: .5rem; 
+    border-radius: .5rem; 
+    min-height: 15rem;
+    max-height: 18rem; 
+    overflow: hidden; 
+    width: 90%; 
+    border: .5rem solid var(--ion-color-adopcion)
+}
+
+.selected-Tra{
+    background-color: var(--ion-color-beta); 
+    margin: .5rem; 
+    border-radius: .5rem; 
+    min-height: 15rem;
+    max-height: 18rem; 
+    overflow: hidden; 
+    width: 90%; 
+    border: .5rem solid rgba(0,255,0,.5)
+}
+
+.toggle-Per{
+    --handle-background-checked: var(--ion-color-perdidos);
+    --background-checked: rgba(var(--ion-color-perdidos-rgb),.5);
+}
+.toggle-Enc{
+    --handle-background-checked: var(--ion-color-encontrados);
+    --background-checked: rgba(var(--ion-color-encontrados-rgb),.5);
+}
+.toggle-Ado{
+    --handle-background-checked: var(--ion-color-adopcion);
+    --background-checked: rgba(var(--ion-color-adopcion-rgb),.5);
+}
+.toggle-Tra{
+    --handle-background-checked: var(--ion-color-transito);
+    --background-checked: rgba(var(--ion-color-transito-rgb),.5);
+}
+
+.typeButton{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    --margin: 0;
+    --padding: 0;
+    border-radius: 0;
+    --border-radius: 0;
+    --box-shadow: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+    --background: rgba(0,0,0,.3);
+    opacity: .7;
+    --color: rgba(0,0,0,.7);
+    font-family: DM-SANS;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: none;
+}
+
+.selected{
+    --background: var(--ion-color-background);
+    opacity: 1;
+    --color: rgba(0,0,0,1);
+    font-family: DM-SANS;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: none;
+}
+
+
+#modalPreCoincidencias, #modalCoincidencias {
+    --background: transparent;
+    // --height: 75%;
+    width: 100%;
+    --box-shadow: none;
+    --backdrop-opacity: .75
+  
+  }
+    
+  ion-modal::part(backdrop) {
+      background: rgb(0,0,0);
+      opacity: .75;
+  }
+  
+  
+  ion-modal ion-content{
+      --background: transparent;
+  }
+  
+  ion-modal ion-toolbar {
+      --background: transparent;
+      --color: white;
+      --height: 2rem
+  }
+  
+  ion-modal img{
+      max-height: 100%;
+      width: 100%;
+  }

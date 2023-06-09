@@ -1,0 +1,24 @@
+<ion-item style="--background: var(--ion-color-beta)" lines = "full" (click)="misMascotas()" *ngIf="perfilLogeado">
+  <ion-icon color="light" name="paw" ></ion-icon>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Mis Mascotas</ion-text>
+</ion-item>
+
+
+<ion-item style="--background: var(--ion-color-beta)" lines = "full" (click)="shareProfile()">
+  <ion-icon color="light" name="share-social-outline"></ion-icon>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Compartir perfil</ion-text>
+  <button hidden class="btn" [attr.data-clipboard-text]="textToCopy"></button>
+</ion-item>
+
+<ion-item id="editPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="editUser()" *ngIf="perfilLogeado" >
+  <ion-icon color="light" name="create-outline"></ion-icon>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Editar perfil</ion-text>
+</ion-item>
+<ion-item id="pausarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="changePassword()" *ngIf="perfilLogeado" >
+  <ion-icon color="light" name="lock-closed-outline"></ion-icon>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Cambiar constraseña</ion-text>
+</ion-item>
+<ion-item id="reanudarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="cerrarSesion()" *ngIf="perfilLogeado">
+  <ion-icon color="light" name="exit-outline"></ion-icon>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Cerrar sesion</ion-text>
+</ion-item>

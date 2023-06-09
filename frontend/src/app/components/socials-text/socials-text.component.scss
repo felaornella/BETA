@@ -1,0 +1,40 @@
+.title {
+    font-family: DM-Sans;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: .5;
+    margin-bottom: 0;
+}
+
+.description {
+    font-family: DM-Sans;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.5rem;
+    margin-left: 0;
+    align-self: center;
+}
+
+ion-card {
+    box-shadow : none;
+    --color : black;
+    --background: var(--ion-color-background);
+}
+ion-icon {
+    vertical-align : middle;
+    margin-right: 0.4rem;
+}
+ion-list {
+    float:left;
+    --background: var(--ion-color-background);
+    background: var(--ion-color-background);
+}
+
+ion-label {
+    margin: 0!important;
+    --background: var(--ion-color-background);
+}
+ion-item {
+    --min-height: 2rem;
+    --background: var(--ion-color-background);
+}

@@ -1,0 +1,26 @@
+.publication {
+    margin: 0 .5rem 1rem .5rem; 
+    border-radius: .5rem; 
+    min-height: 17rem; 
+    max-height: 19rem; 
+    overflow: hidden;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 2.5px 2px rgba(0, 0, 0, 0.06),
+    0 2.3px 7.9px rgba(0, 0, 0, 0.072),
+    0 1.8px 3.4px rgba(0, 0, 0, 0.086),
+    0 2px 2px rgba(0, 0, 0, 0.12)
+}
+.publication-perdidos {
+    background-color: #FFCA99;
+}
+.publication-encontrados {
+    background-color: #99D4FF;
+}
+.publication-adopcion {
+    background-color: #D299FF;
+}
+.publication-transito {
+    background-color: #A9E3C0;
+}
