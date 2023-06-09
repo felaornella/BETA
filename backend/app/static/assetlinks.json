@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.beta.betaapp",
+                 "sha256_cert_fingerprints": ["09:87:AE:38:DF:F3:E8:0A:C1:E5:AF:4C:C1:70:05:76:65:52:4D:7E:E6:1F:B8:10:A6:59:F3:7E:E3:EB:08:9C"] }
+  }]

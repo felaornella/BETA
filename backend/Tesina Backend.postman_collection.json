@@ -1,0 +1,1616 @@
+{
+	"info": {
+		"_postman_id": "53991049-b40c-4bb0-a14f-3b61c84dcf5a",
+		"name": "Tesina Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21603061"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "felipeornella@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Pindonga",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Protected",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/protected",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"protected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "cccaa5c7-35be-4a67-8017-2920d94a4225",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - Organizacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "es_organizacion",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "nombreOrganizacion",
+							"value": "Huellitas",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "Una asociacion re copada que rescata perros y les encuentra un hogar",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "huellitas@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "La Plata",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "2215062101",
+							"type": "text"
+						},
+						{
+							"key": "dniResponsable",
+							"value": "42627425",
+							"type": "text"
+						},
+						{
+							"key": "nombreResponsable",
+							"value": "Felipe",
+							"type": "text"
+						},
+						{
+							"key": "apellidoResponsable",
+							"value": "Ornella",
+							"type": "text"
+						},
+						{
+							"key": "contrasenia",
+							"value": "Mango",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "es_organizacion",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Felipe",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Ornella",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "felipeornella@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "fecha_nacimiento",
+							"value": "2000-04-18",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "2215062101",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Pindonga",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/recuperar",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"recuperar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado - Perdidos & Encontrados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/listado/perdidos_y_encontrados",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"listado",
+						"perdidos_y_encontrados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado - Adopcion & Transito",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/listado/adopcion_y_transito",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"listado",
+						"adopcion_y_transito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva Publicacion - Perdido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "dac0f76b-ef30-4770-bc1e-518842468a90",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Bozinga",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "edad",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "edad_unidad",
+							"value": "años",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "colores",
+							"value": "Negro",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tamaño",
+							"value": "Grande",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "sexo",
+							"value": "Macho",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "caracteristicas",
+							"value": "Cabezon",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "geo_lat",
+							"value": "-34.920494",
+							"type": "text"
+						},
+						{
+							"key": "geo_long",
+							"value": "-57.953568",
+							"type": "text"
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "raza_mascota",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id_mascota",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/publicacion/nueva/:tipo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"nueva",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva Publicacion - Encontrado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "dac0f76b-ef30-4770-bc1e-518842468a90",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Bozinga",
+							"type": "text"
+						},
+						{
+							"key": "edad",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "edad_unidad",
+							"value": "años",
+							"type": "text"
+						},
+						{
+							"key": "edad_aprox",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "colores",
+							"value": "Negro",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Grande",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Macho",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "Cabezon",
+							"type": "text"
+						},
+						{
+							"key": "geo_lat",
+							"value": "-34.920494",
+							"type": "text"
+						},
+						{
+							"key": "geo_long",
+							"value": "-57.953568",
+							"type": "text"
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/publicacion/nueva/:tipo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"nueva",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva Publicacion - Adopcion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "dac0f76b-ef30-4770-bc1e-518842468a90",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Bozinga",
+							"type": "text"
+						},
+						{
+							"key": "edad",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "edad_unidad",
+							"value": "años",
+							"type": "text"
+						},
+						{
+							"key": "colores",
+							"value": "Negro",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Grande",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Macho",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "Cabezon",
+							"type": "text"
+						},
+						{
+							"key": "geo_lat",
+							"value": "-34.920494",
+							"type": "text"
+						},
+						{
+							"key": "geo_long",
+							"value": "-57.953568",
+							"type": "text"
+						},
+						{
+							"key": "castracion",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "vacunacion",
+							"value": "Si",
+							"type": "text"
+						},
+						{
+							"key": "patologias",
+							"value": "No",
+							"type": "text"
+						},
+						{
+							"key": "medicacion",
+							"value": "No",
+							"type": "text"
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "id_mascota",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/publicacion/nueva/:tipo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"nueva",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva Publicacion - Transito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Bozinga",
+							"type": "text"
+						},
+						{
+							"key": "edad",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "edad_unidad",
+							"value": "años",
+							"type": "text"
+						},
+						{
+							"key": "colores",
+							"value": "Negro",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Grande",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Macho",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "Cabezon",
+							"type": "text"
+						},
+						{
+							"key": "geo_lat",
+							"value": "-34.920494",
+							"type": "text"
+						},
+						{
+							"key": "geo_long",
+							"value": "-57.953568",
+							"type": "text"
+						},
+						{
+							"key": "castracion",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "vacunacion",
+							"value": "Si",
+							"type": "text"
+						},
+						{
+							"key": "patologias",
+							"value": "No",
+							"type": "text"
+						},
+						{
+							"key": "duracion_transito",
+							"value": "1 a 2 semanas",
+							"type": "text"
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "id_mascota",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/publicacion/nueva/:tipo",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"nueva",
+						":tipo"
+					],
+					"variable": [
+						{
+							"key": "tipo",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Detalle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/publicacion/detalle/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"detalle",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Editar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Tangon",
+							"type": "text"
+						},
+						{
+							"key": "edad",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "edad_unidad",
+							"value": "años",
+							"type": "text"
+						},
+						{
+							"key": "edad_aprox",
+							"value": "false",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "colores",
+							"value": "Negro",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Grande",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Macho",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "Cabezon",
+							"type": "text"
+						},
+						{
+							"key": "castracion",
+							"value": "false",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "vacunacion",
+							"value": "Completa",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "patologias",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "medicacion",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "geo_lat",
+							"value": "-34.920494",
+							"type": "text"
+						},
+						{
+							"key": "geo_long",
+							"value": "-57.953568",
+							"type": "text"
+						},
+						{
+							"key": "duracion_transito",
+							"value": "1 a 6 dias",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/FORNELLA/Downloads/71818149_778542739254824_1327338992626040832_n.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/publicacion/editar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"editar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Pausar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/publicacion/pausar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"pausar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Reanudar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/publicacion/reanudar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"reanudar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Finalizar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/publicacion/finalizar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"finalizar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicacion - Eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/publicacion/eliminar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"publicacion",
+						"eliminar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado - Organizaciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/listado/organizaciones",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"listado",
+						"organizaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perfil - Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/perfil/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"perfil",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perfil - Editar - Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Felipe",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Ornella",
+							"type": "text"
+						},
+						{
+							"key": "fecha_nacimiento",
+							"value": "2000-04-18",
+							"type": "text"
+						},
+						{
+							"key": "instagram",
+							"value": "felaornella.fotografia",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "2215062101",
+							"type": "text"
+						},
+						{
+							"key": "email_visible",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "telefono_visible",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "instagram_visible",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/perfil/editar/1/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"perfil",
+						"editar",
+						"1",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perfil - Editar - Organizacion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "387646de-c35c-4bba-b4fb-3bdf4a303b57",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Huellitas",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "La Plata",
+							"type": "text"
+						},
+						{
+							"key": "descripcion_breve",
+							"value": "Alta organizacion",
+							"type": "text"
+						},
+						{
+							"key": "link_donacion",
+							"value": "mercadopago.com.ar/huellitas.lp",
+							"type": "text"
+						},
+						{
+							"key": "dni_responsable",
+							"value": "42627425",
+							"type": "text"
+						},
+						{
+							"key": "nombre_responsable",
+							"value": "Felipe",
+							"type": "text"
+						},
+						{
+							"key": "apellido_responsable",
+							"value": "Ornella",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "2215062101",
+							"type": "text"
+						},
+						{
+							"key": "instagram",
+							"value": "huellitas.lp",
+							"type": "text"
+						},
+						{
+							"key": "email_visible",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "instagram_visible",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "telefono_visible",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/perfil/editar/2/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"perfil",
+						"editar",
+						"2",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perfil - Busqueda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "search_value",
+							"value": "feli",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/perfil/busqueda",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"perfil",
+						"busqueda"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Imagen por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/imagen/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"imagen",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Detalle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/mascota/detalle/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"detalle",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Detalle QR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/mascota/detalle/:id/qr",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"detalle",
+						":id",
+						"qr"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Agregar Dueño QR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/mascota/agregar_owner/:id/qr",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"agregar_owner",
+						":id",
+						"qr"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Mis_Mascotas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/mascota/mis_mascotas",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"mis_mascotas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Nueva",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Olivia",
+							"type": "text"
+						},
+						{
+							"key": "fecha_nacimiento",
+							"value": "2021-12-01",
+							"type": "text"
+						},
+						{
+							"key": "colores",
+							"value": "Blanco",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Pequeño",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Hembra",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "castracion",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "vacunacion",
+							"value": "Completa",
+							"type": "text"
+						},
+						{
+							"key": "enfermedades",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "cirugias",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "medicacion",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/mascota/nueva",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"nueva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Editar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Oliviaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "fecha_nacimiento",
+							"value": "2021-12-01",
+							"type": "text"
+						},
+						{
+							"key": "colores",
+							"value": "Blanco",
+							"type": "text"
+						},
+						{
+							"key": "tamaño",
+							"value": "Pequeño",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "Hembra",
+							"type": "text"
+						},
+						{
+							"key": "caracteristicas",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "castracion",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "vacunacion",
+							"value": "Completa",
+							"type": "text"
+						},
+						{
+							"key": "enfermedades",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "cirugias",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "medicacion",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "tipo_mascota",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "raza_mascota",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "imagen",
+							"type": "file",
+							"src": "/C:/Users/FORNELLA/Downloads/69505487_751087032000395_3042708085509455872_n.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/mascota/editar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"editar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mascota - Eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "58f32eef-8064-4ed0-bd52-6cdff603e8c4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/mascota/eliminar/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"mascota",
+						"eliminar",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
