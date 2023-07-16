@@ -1627,7 +1627,7 @@ def create_app(environment=env):
     def descargar_android():
         from flask import send_from_directory
         try:
-            return send_from_directory(directory='static', path='app-debug.apk', as_attachment=True)
+            return send_from_directory(directory='static', path='BETA.apk', as_attachment=True)
         except:
             import traceback
             traceback.print_exc()
