@@ -4,7 +4,9 @@ ion-content{
 ion-item { pointer-events: auto; }
 
 
-
+.header-md::after {
+    display: none;
+}
 ion-tab-bar{
     --background:transparent;
     --border-color: transparent;
@@ -135,3 +137,11 @@ ion-input {
     filter: drop-shadow(2px 4px 6px black);
     font-size: 1.2rem;
 }
+
+
+@media screen and (min-width: 1024px) {
+	.edit-user-form {
+		padding-inline: 20%!important;
+		background: #f2f2f2;
+	}
+  }

@@ -104,3 +104,9 @@
 
   
 
+  @media screen and (min-width: 1024px) {
+    ion-content{
+      --padding-start: 28%;
+      --padding-end: 28%;
+    }
+  }

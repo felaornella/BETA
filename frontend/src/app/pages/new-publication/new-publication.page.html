@@ -16,22 +16,22 @@
   <ion-col >
     <div *ngIf="tipoPublicacion==1" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Nueva Publicación - </b><b style="color: var(--ion-color-perdidos)">Mascota Perdida</b></p>
-      <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-perdidos);"></div>
+      <div class="barra-color" style="background-color: var(--ion-color-perdidos);"></div>
     </div>
 
     <div *ngIf="tipoPublicacion==2" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Nueva Publicación - </b><b style="color: var(--ion-color-encontrados)">Mascota Encontrada</b></p>
-      <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-encontrados);"></div>
+      <div class="barra-color" style="background-color: var(--ion-color-encontrados);"></div>
     </div>
 
     <div *ngIf="tipoPublicacion==3" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Nueva Publicación - </b><b style="color: var(--ion-color-adopcion)">Mascota en Adopción</b></p>
-      <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-adopcion);"></div>
+      <div class="barra-color" style="background-color: var(--ion-color-adopcion);"></div>
     </div>
 
     <div *ngIf="tipoPublicacion==4" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Nueva Publicación - </b><b style="color: var(--ion-color-transito)">Mascota en Tránsito</b></p>
-      <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-transito);"></div>
+      <div class="barra-color" style="background-color: var(--ion-color-transito);"></div>
     </div>
 
   </ion-col>
@@ -524,7 +524,7 @@
               Se encontraron algunas publicaciones de <span style="color: var(--ion-color-perdidos);">mascotas perdidas</span> que coinciden con los datos que ingresaste
             </p>
             <p style="color: rgba(0,0,0,.85);font-family: DM-SANS;text-align: center;font-size: 1.25rem;font-weight: 600;margin-top: 1.5rem;margin-bottom: 0;">
-              ¿Desas verlas?
+              ¿Deseas verlas?
             </p>
 
             <ion-row>
@@ -557,23 +557,25 @@
   <ion-modal id="modalCoincidencias" #modalC>
     <ng-template>
       <ion-content no-shadow>
-        <ion-toolbar style="position: absolute; top: 0">
-          <ion-buttons slot="end">
+        <ion-toolbar style="top: 0; text-align: center;">
+          <span *ngIf="similares.length > 0" style="font-family: 'DM-SANS'; opacity: .75;" >Deslice lateralmente para ver más...</span>
+          <ion-buttons slot="end" style="position: absolute; right: 0;">
             <ion-button color="light" (click)="cerrarSimilares()">
               <ion-icon  style="color: white; height: 1.25rem;" name="close"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
-        <ion-slides *ngIf="similares.length > 0" pager="false" [options]="slideOpts" style="height: 100%;">
+
+        <ion-slides *ngIf="similares.length > 0" pager="false" [options]="slideOpts" class="slideModal">
           <ion-slide *ngFor="let similar of similares">
-            <div style="height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center;">
-              <div *ngIf="tipoPublicacion == 1" style="height: 90%; text-align: center;background-color: var(--ion-color-background);border: .5rem solid var(--ion-color-encontrados);margin: 1.5rem;border-radius: .5rem; ;">
+            <div class="firstDivSlide" style="height: 100%; width: 100%; display: flex; flex-direction: column;">
+              <div class="secondDivSlide" *ngIf="tipoPublicacion == 1" style="text-align: center;background-color: var(--ion-color-background);border: .5rem solid var(--ion-color-encontrados);border-radius: .5rem; ;">
                 <ion-row style="height: 90%">
                   <ion-col style="height: 100%; padding: 0">
                     <ion-row style="height: 40%; max-height: 40%;">
                       <img [src]="getUrlImg(similar.imagen)" style="height: 100%; width: 100%; object-fit: cover;">
                     </ion-row>
-                    <ion-row style="height: 60%; max-height: 60%; overflow: scroll;">
+                    <ion-row class="rowInfo">
                       <ion-col>
                         <p style="font-size: 2rem; font-family: DM-Sans; font-weight: 600; margin: .5rem 0 0 0; color: var(--ion-color-encontrados);"> {{similar.coincidencia}}%</p>
                         <p style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600; margin: 0; color: var(--ion-color-encontrados);"> COINCIDENCIA</p>
@@ -641,13 +643,13 @@
                 </ion-row> 
               </div>
 
-              <div *ngIf="tipoPublicacion == 2" style="height: 90%; text-align: center;background-color: var(--ion-color-background);border: .5rem solid var(--ion-color-perdidos);margin: 1.5rem;border-radius: .5rem; ;">
+              <div class="secondDivSlide" *ngIf="tipoPublicacion == 2" style="text-align: center;background-color: var(--ion-color-background);border: .5rem solid var(--ion-color-perdidos);border-radius: .5rem; ;">
                 <ion-row style="height: 90%">
                   <ion-col style="height: 100%; padding: 0">
                     <ion-row style="height: 40%; max-height: 40%;">
                       <img [src]="getUrlImg(similar.imagen)" style="height: 100%; width: 100%; object-fit: cover;">
                     </ion-row>
-                    <ion-row style="height: 60%; max-height: 60%; overflow: scroll;">
+                    <ion-row class="rowInfo">
                       <ion-col>
                         <p style="font-size: 2rem; font-family: DM-Sans; font-weight: 600; margin: .5rem 0 0 0; color: var(--ion-color-perdidos);"> {{similar.coincidencia}}%</p>
                         <p style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600; margin: 0; color: var(--ion-color-perdidos);"> COINCIDENCIA</p>

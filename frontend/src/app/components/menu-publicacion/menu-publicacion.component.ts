@@ -176,4 +176,23 @@ export class MenuPublicacionComponent implements OnInit {
 
     await toast.present();
   }
+
+  pausarPublicacionModal(){
+    const modal = document.getElementById("modalPausar") as HTMLIonModalElement
+    modal.present()
+  }
+  finalizarPublicacionModal(){
+    const modal = document.getElementById("modalFinalizar") as HTMLIonModalElement
+    modal.present()
+  }
+  reanudarPublicacionModal(){
+    const modal = document.getElementById("modalReanudar") as HTMLIonModalElement
+    modal.present()
+  }
+  eliminarPublicacionModal(){
+    const modal = document.getElementById("modalEliminar") as HTMLIonModalElement
+    modal.present()
+  }
+  
+  
 }

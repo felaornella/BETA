@@ -138,3 +138,21 @@ a {
 .d-block {
   display: block !important;
 }
+
+.button-submit{
+  --border-radius: 0.5rem; height: 3rem;
+}
+.texto-button{
+  font-size: 1rem;
+  font-family: DM-Sans;
+  text-transform: none;
+  font-weight: 600;
+}
+.login-form{
+
+}
+@media screen and (min-width: 1024px) {
+	.login-form {
+		padding-inline: 30%!important;
+	}
+  }

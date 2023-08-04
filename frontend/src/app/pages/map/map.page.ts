@@ -25,7 +25,14 @@ export class MapPage implements OnInit {
     slidesPerView: 1.2,
     centeredSlides: true,
     centeredSlidesBounds: false,
-    spaceBetween: 2.5 
+    spaceBetween: 2.5,
+    breakpoints: {
+      // Pantallas grandes
+      1024: {
+        spaceBetween: 5,
+        slidesPerView: 2
+      }
+    }
   };
 
   publicaciones: Publicacion[];

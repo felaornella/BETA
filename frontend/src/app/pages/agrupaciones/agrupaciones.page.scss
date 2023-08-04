@@ -8,6 +8,16 @@
     transform: translateY(-50%);
   }
   
+#agrupacion {
+  box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 2.5px 2px rgba(0, 0, 0, 0.06),
+    0 2.3px 7.9px rgba(0, 0, 0, 0.072),
+    0 1.8px 3.4px rgba(0, 0, 0, 0.086),
+    0 2px 2px rgba(0, 0, 0, 0.12)
+}
+
   .rowspinner {
     display: flex;
       flex-direction: row;
@@ -111,3 +121,27 @@
 
   
 
+  .filtrosrapidos{
+    position:fixed; 
+    height: 3.5rem;
+  }
+  .listado {
+    margin-top: 4.5rem;
+  }
+  @media screen and (min-width: 1024px) {
+    /* Estilos para componentes de la aplicación en pantallas grandes */
+    .filtrosrapidos{
+      position: unset; 
+      height: 3.5rem;
+    }
+    .listado {
+      margin-top: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    ion-content{
+      --padding-start: 30%;
+      --padding-end: 30%;
+    }
+  }

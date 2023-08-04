@@ -104,3 +104,31 @@ ion-range {
   --bar-background-active: rgba(255,255,255,7)
   --bar-background: #a2d2ff;
 }
+
+.filtrosrapidos{
+  position:fixed; 
+  height: 3.5rem;
+}
+.listado {
+  overflow: scroll; margin-top: 3.5rem; padding: 0 .5rem 1rem .5rem
+}
+
+.columna_variable{
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  /* Estilos para componentes de la aplicación en pantallas grandes */
+  .filtrosrapidos{
+    position: unset; 
+    padding-inline: 25%;
+    height: 3.5rem;
+  }
+  .listado {
+    overflow: hidden; margin-top: 0rem; padding: 0 .5rem 1rem .5rem
+  }
+  
+  .columna_variable{
+    max-width: 33%;
+  }
+}

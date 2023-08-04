@@ -13,7 +13,7 @@
     
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content  style="--padding-start: 0%!important; --padding-end: 0%!important;">
     <ion-refresher id="refresher" slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -96,25 +96,25 @@
                 <ion-row style="margin-top: .5rem;" *ngIf="user">
                   <ion-col size="6" style="text-align: center">                
                     <ion-label class="title" style="font-size: 1rem; text-align: center;">Perdidos</ion-label>
-                    <span style="margin-inline: auto; background-color: var(--ion-color-perdidos); color: white; font-weight: bold; font-family: 'DM Sans'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="margin-inline: auto; background-color: var(--ion-color-perdidos); color: white; font-weight: bold; font-family: 'DM-SANS'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
                       {{cant_publicaciones["1"]}}
                     </span>
                   </ion-col>
                   <ion-col size="6" style="text-align: center">
                     <ion-label class="title" style="font-size: 1rem; text-align: center;">Encontrados</ion-label>
-                    <span style="margin-inline: auto; background-color: var(--ion-color-encontrados); color: white; font-weight: bold; font-family: 'DM Sans'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="margin-inline: auto; background-color: var(--ion-color-encontrados); color: white; font-weight: bold; font-family: 'DM-SANS'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
                       {{cant_publicaciones["2"]}}
                     </span>
                   </ion-col>
                   <ion-col size="6" style="text-align: center">
                     <ion-label class="title" style="font-size: 1rem; text-align: center;">Adopción</ion-label>
-                    <span style="margin-inline: auto; background-color: var(--ion-color-adopcion); color: white; font-weight: bold; font-family: 'DM Sans'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="margin-inline: auto; background-color: var(--ion-color-adopcion); color: white; font-weight: bold; font-family: 'DM-SANS'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
                       {{cant_publicaciones["3"]}}
                     </span>
                   </ion-col>
                   <ion-col size="6" style="text-align: center">
                     <ion-label class="title" style="font-size: 1rem; text-align: center;">Tránsito</ion-label>
-                    <span style="margin-inline: auto; background-color: var(--ion-color-transito); color: white; font-weight: bold; font-family: 'DM Sans'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                    <span style="margin-inline: auto; background-color: var(--ion-color-transito); color: white; font-weight: bold; font-family: 'DM-SANS'; font-size: 1rem;  border-radius: 1rem; width: 2rem; height: 2rem; text-align: center; display: flex; flex-direction: column; justify-content: center;">
                       {{cant_publicaciones["4"]}}
                     </span>
                   </ion-col>
@@ -135,7 +135,7 @@
                   <ion-col size="12" style="text-align: left; padding: 0;">
                     <ion-row style="margin: 0;">
                       <ion-col size="5" style="padding: 0; text-align: center;">
-                        <span style="color: var(--ion-color-encontrados); font-weight: bold; font-family: DM Sans; font-size: 6rem;  overflow-wrap: initial; ">
+                        <span style="color: var(--ion-color-encontrados); font-weight: bold; font-family: 'DM-SANS'; font-size: 6rem;  overflow-wrap: initial; ">
                           {{user.puntaje}}
                         </span>  
                       </ion-col>
@@ -181,7 +181,7 @@
       </ion-grid>
     </div>
     <div *ngIf="publication">
-      <div *ngIf="user" style="margin-top: 1.5rem; padding: 0 .5rem 1rem .5rem">
+      <div *ngIf="user" class="info-user" style="margin-top: 1.5rem; padding: 0 .5rem 1rem .5rem">
         <div *ngIf="publicaciones?.length == 0">
             <!-- Mensaje centrado diciendo "Aun no hay publicaciones"-->
             <ion-item style="text-align: center; --background: transparent; --inner-border-width: 0; --border-width: 0; --inner-padding-end: 0; --inner-padding-start: 0;">
@@ -190,7 +190,11 @@
 
         </div>
         <div *ngIf="publicaciones?.length > 0">
-          <app-publication-item  *ngFor="let publi of publicaciones" (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
+          <ion-row style="display: flex; justify-content: center;">
+            <div class="columna_variable" *ngFor="let publi of publicaciones">
+              <app-publication-item (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
+            </div>
+          </ion-row>
         </div>
       </div>
     </div>

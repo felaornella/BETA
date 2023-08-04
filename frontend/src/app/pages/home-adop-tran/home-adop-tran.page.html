@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" id="contentGeneral">
-  <ion-toolbar id="switches" style="position:fixed; height: 3.5rem;">
+  <ion-toolbar id="switches" class="filtrosrapidos">
     <ion-row>
       <ion-col size="6">
         <ion-row style="display: flex; justify-content: center; align-items: center; margin:0">
@@ -50,8 +50,12 @@
     </ion-col>
   </ion-row>
   
-  <div style="overflow: scroll; margin-top: 3.5rem; padding: 0 .5rem 1rem .5rem">
-    <app-publication-item *ngFor="let publi of publicaciones" (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
+  <div class="listado">
+    <ion-row style="display: flex; justify-content: center;">
+      
+        <app-publication-item  class="columna_variable" *ngFor="let publi of publicaciones" [hidden]="!publi.visible" (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
+      
+    </ion-row>
   </div>
 </ion-content>
 <ion-menu side="end"

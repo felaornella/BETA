@@ -86,6 +86,7 @@ export class UsersPage implements OnInit {
     });
     loading.present();
     this.authService.login({email: this.email, password: this.password})
+    // this.authService.login({email: "felipeornella@hotmail.com", password: "Pindonga"})
       .pipe(
         catchError((error) => {
           if ([401, 403].includes(error.status)) {

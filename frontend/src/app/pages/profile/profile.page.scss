@@ -117,3 +117,18 @@ ion-card {
     --color : black;
     background: var(--ion-color-background)!important;
 }
+
+
+.columna_variable{
+    width: 100%;
+  }
+
+@media screen and (min-width: 1024px) {
+	.info-user {
+		// padding-inline: 25%!important;
+		background: #f2f2f2;
+	}
+    .columna_variable{
+        max-width: 33%;
+      }
+  }

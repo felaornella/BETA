@@ -10,7 +10,7 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="user">
+<ion-content *ngIf="user"  style="--padding-start: 0%!important; --padding-end: 0%!important;">
 
   <ion-row [ngClass]="{'background-user': !user.es_organizacion, 'background-association': user.es_organizacion}">    
     <ion-col size="12">
@@ -43,7 +43,7 @@
     </ion-col>
   </ion-row>
 
-  <form id="editUser" style="padding-inline: .2rem; padding-top: 1rem;">
+  <form id="editUser" style="padding-inline: .2rem; padding-top: 1rem;" class="edit-user-form">
     <input [(ngModel)]="local_imagen" name="local_imagen" type="file" accept="image/jpeg" id="imagen_perfil" hidden (change)="changeListener($event)">
 
     <ion-item lines="none">

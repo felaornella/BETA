@@ -1,30 +1,30 @@
 <ion-item id="sharePublicacion" style="--background: var(--ion-color-beta)" *ngIf="!vencida && estadoGeneral == 1" (click)="sharePublicacion()">
   <ion-icon color="light" name="share-social-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Compartir Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Compartir Publicación</ion-text>
   <button hidden class="btn" [attr.data-clipboard-text]="textToCopy"></button>
 </ion-item>
 <ion-item id="editPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado" (click)="editPublicacion()">
   <ion-icon color="light" name="create-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Editar Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Editar Publicación</ion-text>
 </ion-item>
-<ion-item id="pausarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 1">
+<ion-item id="pausarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 1" (click)="pausarPublicacionModal()">
   <ion-icon color="light" name="pause-circle-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Pausar Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Pausar Publicación</ion-text>
 </ion-item>
-<ion-item id="reanudarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 2">
+<ion-item id="reanudarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 2" (click)="reanudarPublicacionModal()">
   <ion-icon color="light" name="play-circle-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Reanudar Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Reanudar Publicación</ion-text>
 </ion-item>
-<ion-item id="finalizarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 1">
+<ion-item id="finalizarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="!vencida && perfilLogeado && estadoGeneral == 1" (click)="finalizarPublicacionModal()">
   <ion-icon color="light" name="checkmark-circle-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Finalizar Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Finalizar Publicación</ion-text>
 </ion-item>
 <ion-item id="eliminarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" *ngIf="perfilLogeado">
   <ion-icon style="color : #ff2a2a" name="trash-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: #ff2a2a; font-family: DM Sans; font-weight: 600;">Eliminar Publicación</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: #ff2a2a; font-family: 'DM-SANS'; font-weight: 600;" (click)="eliminarPublicacionModal()">Eliminar Publicación</ion-text>
 </ion-item>
 
-<ion-modal id="modalPausar" #modalP trigger="pausarPublicacion">
+<ion-modal id="modalPausar" #modalP >
   <ng-template>
     <ion-content no-shadow>
       <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem;">
@@ -50,7 +50,7 @@
   </ng-template>
 </ion-modal>
 
-<ion-modal id="modalReanudar" #modalR trigger="reanudarPublicacion">
+<ion-modal id="modalReanudar" #modalR >
   <ng-template>
     <ion-content no-shadow>
       <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem;">
@@ -76,7 +76,7 @@
   </ng-template>
 </ion-modal>
 
-<ion-modal id="modalFinalizar" #modalF trigger="finalizarPublicacion">
+<ion-modal id="modalFinalizar" #modalF >
   <ng-template>
     <ion-content no-shadow>
       <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem;">
@@ -102,7 +102,7 @@
   </ng-template>
 </ion-modal>
 
-<ion-modal id="modalEliminar" #modalE trigger="eliminarPublicacion">
+<ion-modal id="modalEliminar" #modalE >
   <ng-template>
     <ion-content no-shadow>
       <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem;">

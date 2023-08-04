@@ -151,7 +151,7 @@
       <ion-modal id="modalImagen" #modalI trigger="imagen_publicacion">
         <ng-template>
           <ion-content no-shadow>
-            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
               <ion-toolbar>
                 <ion-buttons slot="end">
                   <ion-button color="light" (click)="modalI.dismiss()">
@@ -191,9 +191,9 @@
                 </ion-buttons>
               </ion-toolbar>
               <div style="text-align: center;">
-                <img id="imgQRNewOwner" src="" style="margin-bottom: 3rem; filter: drop-shadow(2px 4px 6px black); width: 85%;">
+                <img id="imgQRNewOwner" src="" class="imagenQR">
               </div>
-              <p style="color: white; font-family: 'DM-SANS'; text-align: center; font-size: 1.1rem; margin-left: 2rem; margin-right: 2rem;">Escanee el QR en pantalla desde la cuenta del nuevo dueño.<br><br>Mis Mascotas > Añadir Mascota > Escanear QR</p>
+              <p style="color: white; font-family: 'DM-SANS'; text-align: center; font-size: 1.1rem; margin-left: 2rem; margin-right: 2rem;">Escanee el QR en pantalla desde la cuenta del nuevo dueño.<br><br>Mis Mascotas > Añadir Mascota > Asociar Mascota</p>
             </div>
           </ion-content>
         </ng-template>

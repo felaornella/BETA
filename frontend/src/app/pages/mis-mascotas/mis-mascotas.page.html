@@ -41,13 +41,17 @@
       </p>
     </div>
   </ion-row>
-  <ion-row>
-    <ion-col style="display: flex; flex-direction: column; align-items: center;">
-      <ion-item *ngIf="!hide_spinner" id="spinnerCarga" style="transform: scale(1.5); --inner-border-width:0; margin-top: 5rem;">
-        <ion-spinner color="beta" name="circular"></ion-spinner>
-      </ion-item>
-      <ion-row  id="{{mas.id}}" (click)="seleccionarMascota(mas.id)" *ngFor="let mas of mascotas"
-                class="not-selected"> 
+
+  <ion-row style="display: flex; justify-content: center;">
+    
+    <!-- <ion-col style="display: flex; flex-direction: column; align-items: center;">
+    </ion-col> -->
+    <ion-item *ngIf="!hide_spinner" id="spinnerCarga" style="transform: scale(1.5); --inner-border-width:0; margin-top: 5rem;">
+      <ion-spinner color="beta" name="circular"></ion-spinner>
+    </ion-item>
+
+    <div class="columna_variable" *ngFor="let mas of mascotas" style="cursor: pointer;">
+      <ion-row id="{{mas.id}}" (click)="seleccionarMascota(mas.id)" class="not-selected"> 
         <ion-col size="6" style="padding: 0; background-image: url('{{getUrlImg(mas.imagen)}}'); 
                                 background-size: cover; border-radius: .25rem 0 0 .25rem; background-position: center;
                                 max-height: 18rem;">
@@ -71,8 +75,11 @@
           </ion-row>
         </ion-col>
       </ion-row>
-    </ion-col>
+      
+    </div>
   </ion-row>
+
+
   <ion-modal id="modalNewPet" #modalNP trigger="newPet">
     <ng-template>
       <ion-content no-shadow>

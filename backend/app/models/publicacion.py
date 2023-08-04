@@ -109,7 +109,9 @@ class Publicacion(db.Model):
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         self.vencimiento = (
-            datetime.now() + timedelta(days=2) if tipo == 2 and (not retuvo or publicador_id is None) else None
+            datetime.now() + timedelta(days=2)
+            if tipo == 2 and (not retuvo or publicador_id is None)
+            else None
         )
 
     @staticmethod
@@ -142,12 +144,13 @@ class Publicacion(db.Model):
                 [
                     each,
                     Publicacion.calcularDistanciaEnKm(
-                        [float(each.geo_lat), float(each.geo_long)], [float(geo_lat), float(geo_long)]
+                        [float(each.geo_lat), float(each.geo_long)],
+                        [float(geo_lat), float(geo_long)],
                     ),
                 ]
             )
         publis = list(filter(lambda p: p[1] <= 25, publis))
-        publis.sort(key=lambda p: p[1])
+        publis.sort(key=lambda p: (round(p[1], 2), -p[0].created_at))
         return publis
 
     def allEnabledAdopcionYTransitoCerca(geo_lat, geo_long):
@@ -158,25 +161,33 @@ class Publicacion(db.Model):
                 [
                     each,
                     Publicacion.calcularDistanciaEnKm(
-                        [float(each.geo_lat), float(each.geo_long)], [float(geo_lat), float(geo_long)]
+                        [float(each.geo_lat), float(each.geo_long)],
+                        [float(geo_lat), float(geo_long)],
                     ),
                 ]
             )
         publis = list(filter(lambda p: p[1] <= 25, publis))
-        publis.sort(key=lambda p: p[1])
+        publis.sort(key=lambda p: (round(p[1], 2), -p[0].created_at))
         return publis
 
     def allEnabledEnRango(geo_lat, geo_long, rango, tipo):
-        publicaciones = Publicacion.query.filter_by(enabled=True, tipo=tipo, estadoGeneral=1).all()
-        publicaciones = [p for p in publicaciones if p.vencimiento is None or p.vencimiento > datetime.now()]
+        publicaciones = Publicacion.query.filter_by(
+            enabled=True, tipo=tipo, estadoGeneral=1
+        ).all()
+        publicaciones = [
+            p
+            for p in publicaciones
+            if p.vencimiento is None or p.vencimiento > datetime.now()
+        ]
         publis = []
         for each in publicaciones:
             distancia = Publicacion.calcularDistanciaEnKm(
-                [float(each.geo_lat), float(each.geo_long)], [float(geo_lat), float(geo_long)]
+                [float(each.geo_lat), float(each.geo_long)],
+                [float(geo_lat), float(geo_long)],
             )
             if distancia <= rango:
                 publis.append([each, distancia])
-        publis.sort(key=lambda p: p[1])
+        publis.sort(key=lambda p: (round(p[1], 2), -p[0].created_at))
         return publis
 
     def calcularDistanciaEnKm(geo1, geo2):
@@ -213,12 +224,13 @@ class Publicacion(db.Model):
                 [
                     each,
                     Publicacion.calcularDistanciaEnKm(
-                        [float(each.geo_lat), float(each.geo_long)], [float(lat), float(long)]
+                        [float(each.geo_lat), float(each.geo_long)],
+                        [float(lat), float(long)],
                     ),
                 ]
             )
         publis = list(filter(lambda p: p[1] <= 20, publis))
-        publis.sort(key=lambda p: p[1])
+        publis.sort(key=lambda p: (round(p[1], 2), -p[0].created_at))
         return publis
 
     def buscarPublicacionPorPublicador(id_publicador):
@@ -279,7 +291,9 @@ class Publicacion(db.Model):
             "created_at": self.created_at.strftime("%d/%m/%Y"),
             "updated_at": self.updated_at.strftime("%d/%m/%Y"),
             "vencimiento": self.vencimiento,
-            "vencida": self.vencimiento <= datetime.now() if self.vencimiento is not None else False,
+            "vencida": self.vencimiento <= datetime.now()
+            if self.vencimiento is not None
+            else False,
             "imagen": self.imagen_id,
             "publicador": self.publicador.complete_dict()
             if self.publicador is not None
@@ -300,7 +314,9 @@ class Publicacion(db.Model):
 
     def dict_similares(self):
         dif = round((datetime.now() - self.created_at).total_seconds())
-        if (dif / 3600) > 1:
+        if (dif / 86400) > 1:
+            tiempo_llevado = "Hace {} dias".format(round(dif / 86400))
+        elif (dif / 3600) > 1:
             tiempo_llevado = "Hace {} horas".format(round(dif / 3600))
         else:
             tiempo_llevado = "Hace {} minutos".format(round(dif / 60))
@@ -321,7 +337,9 @@ class Publicacion(db.Model):
         }
 
     def buscarPublicacionActivaPorMascota(id_mascota, tipo):
-        pubs = Publicacion.query.filter_by(mascota_id=id_mascota, enabled=1, tipo=tipo).all()
+        pubs = Publicacion.query.filter_by(
+            mascota_id=id_mascota, enabled=1, tipo=tipo
+        ).all()
         for p in pubs:
             if (p.estadoGeneral in [1, 2] and p.vencimiento is None) or (
                 p.estadoGeneral in [1, 2] and p.vencimiento > datetime.now()

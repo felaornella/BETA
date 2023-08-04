@@ -41,3 +41,11 @@
 .publication-transito {
     background-color: #A9E3C0;
 }
+
+@media screen and (min-width: 1024px) {
+	ion-router-outlet > * > ion-header + ion-content{
+		--padding-start: 0;
+		--padding-end: 0;
+		background: #f2f2f2;
+	}
+  }

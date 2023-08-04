@@ -1,14 +1,14 @@
 <ion-item style="--background: var(--ion-color-beta)" lines = "full" (click)="shareMascota()">
   <ion-icon color="light" name="share-social-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Compartir mascota</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Compartir mascota</ion-text>
   <button hidden class="btn" [attr.data-clipboard-text]="textToCopy"></button>
 </ion-item>
 
 <ion-item id="editPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="editMascota()" *ngIf="perfilLogeado" >
   <ion-icon color="light" name="create-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: DM Sans; font-weight: 600;">Editar mascota</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Editar mascota</ion-text>
 </ion-item>
 <ion-item id="pausarPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="deleteMascota()" *ngIf="perfilLogeado" >
   <ion-icon  style="color : #ff2a2a" name="trash-outline"></ion-icon>
-  <ion-text style="margin-left: .5rem; text-align: left; color: #ff2a2a; font-family: DM Sans; font-weight: 600;" >Eliminar mascota</ion-text>
+  <ion-text style="margin-left: .5rem; text-align: left; color: #ff2a2a; font-family: 'DM-SANS'; font-weight: 600;" >Eliminar mascota</ion-text>
 </ion-item>

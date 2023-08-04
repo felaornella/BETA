@@ -32,6 +32,7 @@
 
 :root {
 	--ion-color-background:#f2f2f2;
+	--ion-background-color:#f2f2f2;
 
 	--ion-color-beta: #28BA62;
 	--ion-color-beta-rgb: 40,186,98;
@@ -236,7 +237,7 @@ ion-popover ion-item.item-checkbox-checked.sc-ion-select-popover-md{
 	.loading-content{
 		color: var(--ion-color-beta-contrast);
 		font-size: 1.4rem;
-		font-family: 'DM SANS';
+		font-family: 'DM-SANS';
 		
 	}
 	.loading-spinner{
@@ -254,4 +255,15 @@ ion-popover ion-item.item-checkbox-checked.sc-ion-select-popover-md{
   }
   
 
-  
+  @media screen and (min-width: 1024px) {
+	ion-router-outlet > * > ion-header + ion-content{
+		// --padding-start: 28%;
+		// --padding-end: 28%;
+		background: #f2f2f2;
+	}
+	ion-router-outlet > * > ion-header + * + ion-content{
+		// --padding-start: 20%;
+		// --padding-end: 20%;
+		background: #f2f2f2;
+	}
+  }

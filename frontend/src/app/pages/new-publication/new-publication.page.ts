@@ -412,6 +412,7 @@ export class NewPublicationPage implements OnInit {
           if (data["new"]){
             if (data["cant_similares"] == 0){
               //this.presentToast()
+              this.presentToast("Publicacion creada con exito")
               this.navCtrl.navigateRoot("/publicacion-detalle/"+this.tipoPublicacion+"/"+data["publicacion"]["id"])
             }else{
               this.id_redirect_to= data["publicacion"]["id"]
@@ -447,7 +448,11 @@ export class NewPublicationPage implements OnInit {
   rechazarSimilares(){
     const modalPreCoincidencias = document.getElementById("modalPreCoincidencias") as HTMLIonModalElement
     modalPreCoincidencias.dismiss()
-    this.presentToast("Publicacion creada con exito")
+    if (!this .alert){
+      this.presentToast("Publicacion creada con exito")
+    }else{
+      this.presentAlert()
+    }
     this.navCtrl.navigateRoot("/publicacion-detalle/"+this.tipoPublicacion+"/"+this.id_redirect_to)
   }
 
@@ -468,7 +473,11 @@ export class NewPublicationPage implements OnInit {
   cerrarSimilares(){
     const modalCoincidencias = document.getElementById("modalCoincidencias") as HTMLIonModalElement
     modalCoincidencias.dismiss()
-    this.presentToast("Publicacion creada con exito")
+    if (!this .alert){
+      this.presentToast("Publicacion creada con exito")
+    }else{
+      this.presentAlert()
+    }
     this.navCtrl.navigateRoot("/publicacion-detalle/"+this.tipoPublicacion+"/"+this.id_redirect_to)
   }
 

@@ -21,7 +21,7 @@
   </ion-row>
   <ion-row style="display: flex; justify-content: center; align-items: center;" *ngIf="resultados.length==0">
     <ion-col style="display: flex; flex-direction: column; align-items: center; padding-left: 1rem; padding-right: 1rem;">
-      <p style="opacity: .65; font-family: 'DM Sans'; font-weight: 600; font-size: .9rem;">No se encontraron resultados</p>
+      <p style="opacity: .65; font-family: 'DM-SANS'; font-weight: 600; font-size: .9rem;">No se encontraron resultados</p>
     </ion-col>
   </ion-row>
   <ion-row *ngFor="let res of resultados" style="display: flex; justify-content: center; align-items: center;" (click)="perfil(res.id)">

@@ -5,19 +5,19 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content style="--background:var(--ion-color-background)">
+<ion-content style="--background:var(--ion-color-background); --padding-start: 0%!important; --padding-end: 0%!important;">
   <ion-row> 
     <ion-col class="col-navbar" id="header">
       <img src="assets/logo_con_nombre.png" style="max-height: 15rem; padding-block: 10px;">
     </ion-col> 
   </ion-row>
   <!-- SELECTOR DE FORMA DE CARGA -->
-  <ion-row style="height: 3.5rem; padding-inline: 1rem;" *ngIf="tipoPublicacion!=2">
+  <ion-row class="login-form" style="height: 3.5rem; padding-inline: 1rem;" *ngIf="tipoPublicacion!=2">
     <ion-col size="6" style="padding: 0 .5rem;">
       <ion-button (click)="switchType(1)" 
                   [ngClass]="{'typeButton': true,
                               'selected': showing == 1}">
-        <ion-label style="font-weight: 600;">Iniciar Sesion</ion-label>
+        <ion-label style="font-weight: 600;">Iniciar Sesión</ion-label>
       </ion-button>
     </ion-col>
     <ion-col size="6" style="padding: 0 .5rem;">
@@ -29,7 +29,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row style="margin-top: 1.25rem;">
+  <ion-row class="login-form" style="margin-top: 1.25rem;">
     <!--LOGIN-->
     <ion-col *ngIf="showing == 1" style="padding:0">
       <form id="login">
@@ -51,7 +51,9 @@
     
       <ion-row>
         <ion-col class="ion-padding">
-          <ion-button (click)="login()" type="submit" form="login" color="beta" expand="block"><ion-text color="light">Iniciar sesion</ion-text></ion-button>
+          <ion-button *ngIf="hide_spinner"  class="button-submit" (click)="login()" type="submit" form="login" color="beta" expand="block">
+            <ion-text color="light" class="texto-button">Iniciar Sesión</ion-text>
+          </ion-button>
         </ion-col>
       </ion-row>
       
@@ -153,7 +155,9 @@
         </ion-item>
         <ion-row>
           <ion-col class="ion-padding">
-            <ion-button type="submit" form="register" (click)="register()" color="beta" expand="block">Registrarse</ion-button>
+            <ion-button *ngIf="hide_spinner"  class="button-submit" (click)="register()" type="submit" form="register" color="beta" expand="block">
+              <ion-text color="light" class="texto-button">Registrarse</ion-text>
+            </ion-button>
           </ion-col>
         </ion-row>
       </form>    
@@ -163,7 +167,7 @@
     <ion-col *ngIf="showing == 3" style="padding:0">
       <ion-row style="justify-content: center;">
         <ion-col size="7" style="padding: 0 .5rem; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-          <ion-label style="font-weight: 600; color: var(--ion-color-beta); font-family: DM Sans; font-size: 1rem; margin-top: .25rem;">
+          <ion-label style="font-weight: 600; color: var(--ion-color-beta); font-family: 'DM-SANS'; font-size: 1rem; margin-top: .25rem;">
             Recuperar Contraseña
           </ion-label>
           <div style="height: 2px; width: 80%; background: var(--ion-color-beta); margin-top: 1rem;"></div>
@@ -177,9 +181,9 @@
       </form>
       <ion-row  style="width: 90%;margin-inline: auto; ;margin-bottom: 2rem; margin-top: 1rem;">
         <ion-col style="text-align: center;">
-          <ion-button *ngIf="hide_spinner" (click)="recuperar()" style="width: 100%; height: 4rem; --background: var(--ion-color-beta); --border-radius: 1rem">
-            <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Recuperar Contraseña </span>
-          </ion-button>
+            <ion-button *ngIf="hide_spinner"  class="button-submit" (click)="recuperar()" type="submit" form="recuperar" color="beta" expand="block">
+              <ion-text color="light" class="texto-button">Recuperar Contraseña</ion-text>
+            </ion-button>
           <ion-spinner *ngIf="!hide_spinner" color="beta" name="circular" style="transform: scale(1.5)"></ion-spinner>
         </ion-col>
       </ion-row>
