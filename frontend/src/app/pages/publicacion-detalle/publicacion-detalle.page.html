@@ -45,7 +45,8 @@
       <img 
         id="imagen_publicacion"
         style="object-fit: cover; width: 100%; height: 20rem;"
-        [src]="getUrlImg(publicacion.imagen)">
+        [src]="getUrlImg(publicacion.imagen)"
+        (click)="openImageModal()">
 
 
       <div>
@@ -135,7 +136,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="tipoPublicacion == 3 || tipoPublicacion ==4" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+      <ion-row *ngIf="tipoPublicacion === '3' || tipoPublicacion === '4'" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
         <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
             <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0; margin-left: -.75rem;">Descripción Medica</p>
             <ion-row style="margin-top: .25rem;">
@@ -171,7 +172,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="tipoPublicacion ==4" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
+      <ion-row *ngIf="tipoPublicacion === '4'" style="padding-left: 1.5rem; width: 100%; margin-top: .5rem;">
         <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
             <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0; margin-left: -.75rem;">Duracion del Tránsito</p>
             <ion-row style="margin-top: .5rem;">
@@ -231,86 +232,30 @@
         </ion-col>
       </ion-row>
 
-      <ion-modal id="modalImagen" #modalI trigger="imagen_publicacion">
-        <ng-template>
-          <ion-content no-shadow>
-            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-              <ion-toolbar>
-                <ion-buttons slot="end">
-                  <ion-button color="light" (click)="modalI.dismiss()">
-                    <ion-icon  style="color: white; height: 1.25rem;" name="close"></ion-icon>
-                  </ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-              <!-- <img [src]="getUrlImg(publicacion.imagen)" style="transform: scale(.98); object-fit: contain;"> -->
-              <img [src]="getUrlImg(publicacion.imagen)">
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-
-      <ion-modal id="modalContacto" #modalC trigger="contactar">
-        <ng-template>
-          <ion-content no-shadow>
-            <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 1rem">
-              <ion-toolbar style="background-color: rgba(255,255,255); border-radius: 1rem 1rem 0 0;">
-                <ion-title style="text-align: center; font-family: 'DM-SANS'; font-size: 1.5rem; font-weight: bold; color: rgba(0,0,0,.5);">Contacto</ion-title>
-                <ion-buttons slot="end">
-                  <ion-button color="light" (click)="modalC.dismiss()">
-                    <ion-icon  style="color: black; height: 1.25rem;" name="close"></ion-icon>
-                  </ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-              <div style="background-color: rgba(255,255,255); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0 0 1rem 1rem;">
-                <div id="contactos" style="width: 100%; padding-top: .5rem; padding-bottom: 1rem; ">
-
-                  <ion-row *ngIf="publicacion.publicador.instagram_visible" style="justify-content: center; margin-bottom: .5rem;">
-                    <ion-icon  style="color: black; font-size: 1.3rem;" name="logo-instagram"></ion-icon>
-                    <span style="font-size: 1.3rem;  margin-left: 1rem;">
-                      {{publicacion.publicador.instagram}}
-                    </span>
-                  </ion-row>
-                  <ion-row *ngIf="publicacion.publicador.telefono_visible" style="justify-content: center; margin-bottom: .5rem;">
-                    <ion-icon  style="color: black; font-size: 1.3rem;" name="logo-whatsapp"></ion-icon>
-                    <span style="font-size: 1.3rem;  margin-left: 1rem;">
-                      {{publicacion.publicador.telefono}}
-                    </span>
-                  </ion-row>
-
-                  <ion-row *ngIf="publicacion.publicador.email_visible" style="justify-content: center; margin-bottom: .5rem;">
-                    <ion-icon  style="color: black; font-size: 1.3rem;" name="mail-outline"></ion-icon>
-                    <span style="font-size: 1.3rem; margin-left: 1rem;">
-                      {{publicacion.publicador.email}}
-                    </span>
-                  </ion-row>
-
-                  <ion-row *ngIf="!publicacion.publicador.instagram_visible && !publicacion.publicador.telefono_visible && !publicacion.publicador.email_visible" style="justify-content: center; padding: 0 1rem 1rem 1rem;">
-                    <span style="font-size: 1.5rem; font-family: 'DM-Sans'; opacity: .5; margin: 0 1rem; text-align: center;">
-                      Desafortunadamente el usuario no ingreso un telefono de contacto
-                    </span>
-                  </ion-row>
-                </div>
-              </div>
-            </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
       
       <div id="contactar" style="margin-top: 1rem; margin-bottom: 2rem; width: 90%;">
-        <ion-button *ngIf="tipoPublicacion == 1" style="width: 100%; height: 3rem; --background: var(--ion-color-perdidos); --border-radius: .35rem">
-            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        <ion-button (click)="openContactModal()" 
+                    *ngIf="tipoPublicacion === '1'" 
+                    style="width: 100%; height: 3rem; --background: var(--ion-color-perdidos); --border-radius: .35rem">
+          <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
         </ion-button>
 
-        <ion-button *ngIf="tipoPublicacion == 2" style="width: 100%; height: 3rem; --background: var(--ion-color-encontrados); --border-radius: .35rem">
-            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        <ion-button (click)="openContactModal()" 
+                    *ngIf="tipoPublicacion === '2'" 
+                    style="width: 100%; height: 3rem; --background: var(--ion-color-encontrados); --border-radius: .35rem">
+          <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
         </ion-button>
 
-        <ion-button *ngIf="tipoPublicacion == 3" style="width: 100%; height: 3rem; --background: var(--ion-color-adopcion); --border-radius: .35rem">
-            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        <ion-button (click)="openContactModal()" 
+                    *ngIf="tipoPublicacion === '3'" 
+                    style="width: 100%; height: 3rem; --background: var(--ion-color-adopcion); --border-radius: .35rem">
+          <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
         </ion-button>
 
-        <ion-button *ngIf="tipoPublicacion == 4" style="width: 100%; height: 3rem; --background: var(--ion-color-transito); --border-radius: .35rem">
-            <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
+        <ion-button (click)="openContactModal()" 
+                    *ngIf="tipoPublicacion === '4'" 
+                    style="width: 100%; height: 3rem; --background: var(--ion-color-transito); --border-radius: .35rem">
+          <span style="font-size: 1.2rem; font-family: DM-Sans; font-weight: 600;"> CONTACTAR </span>
         </ion-button>
       </div>
     </ion-col>

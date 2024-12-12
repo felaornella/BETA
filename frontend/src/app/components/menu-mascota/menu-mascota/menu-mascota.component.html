@@ -1,7 +1,7 @@
 <ion-item style="--background: var(--ion-color-beta)" lines = "full" (click)="shareMascota()">
   <ion-icon color="light" name="share-social-outline"></ion-icon>
   <ion-text style="margin-left: .5rem; text-align: left; color: white; font-family: 'DM-SANS'; font-weight: 600;">Compartir mascota</ion-text>
-  <button hidden class="btn" [attr.data-clipboard-text]="textToCopy"></button>
+  <button hidden class="btn" ></button>
 </ion-item>
 
 <ion-item id="editPublicacion" style="--background: var(--ion-color-beta)" lines = "full" (click)="editMascota()" *ngIf="perfilLogeado" >

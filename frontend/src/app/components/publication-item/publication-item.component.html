@@ -4,7 +4,7 @@
                   'publication-transito': publi.tipo === 4}" class="publication">
   <ion-col size="5" style="padding: 0; background-image: url(assets/publicacion-imagen-precarga.png);
                   background-size: contain; background-repeat: no-repeat; border-radius: .25rem 0 0 .25rem; background-position: center;">
-                  <img [src]="getUrlImg(publi.imagen)" height="100%" width="100%" style="object-fit: cover;" onerror="this.style.display='none'" />
+                  <img [src]="getUrlImg(publi.imagen)" height="100%" width="100%" style="object-fit: cover;" onerror="this.style.display='none'" draggable="false" />
   </ion-col>
   <ion-col size="7" style="padding-top: .5rem; display: flex; flex-direction: column; justify-content: flex-start;">
     

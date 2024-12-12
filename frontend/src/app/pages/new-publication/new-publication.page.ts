@@ -86,9 +86,9 @@ export class NewPublicationPage implements OnInit {
 
     this.loggedIn =  this.authService.isLoggedIn();
     
-    this.newPet = (this.tipoPublicacion == "2")
+    this.newPet = (this.tipoPublicacion === "2")
 
-    if (!this.loggedIn && this.tipoPublicacion != "2"){
+    if (!this.loggedIn && this.tipoPublicacion !== "2"){
       this.navCtrl.back()
     }
     if (this.loggedIn){
@@ -304,7 +304,7 @@ export class NewPublicationPage implements OnInit {
       return false
     }
 
-    if (!this.sinPlaca && this.tipoPublicacion == '2' && (this.publicacion.nombre == "" || this.publicacion.nombre == undefined)){
+    if (!this.sinPlaca && this.tipoPublicacion === '2' && (this.publicacion.nombre == "" || this.publicacion.nombre == undefined)){
       this.presentToastError("Por favor complete el campo nombre de la mascota o seleccione la opción 'Sin placa identificadora'")
       return false
     }
@@ -466,7 +466,7 @@ export class NewPublicationPage implements OnInit {
   abrirDetalleSimilar(id){
     const modalCoincidencias = document.getElementById("modalCoincidencias") as HTMLIonModalElement
     modalCoincidencias.dismiss()
-    let tipoRedireccion = (this.tipoPublicacion == "2") ? 1 : 2
+    let tipoRedireccion = (this.tipoPublicacion === "2") ? 1 : 2
     this.navCtrl.navigateRoot("/publicacion-detalle/"+tipoRedireccion+"/"+id)
   }
 

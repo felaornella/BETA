@@ -1,15 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController, ToastController, Platform, LoadingController } from '@ionic/angular';
+import { NavController, ToastController, Platform, LoadingController, IonicModule  } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { PublicacionesService } from 'src/app/services/publicaciones/publicaciones.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
-import { ClipboardService   } from 'ngx-clipboard';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-menu-publicacion',
   templateUrl: './menu-publicacion.component.html',
   styleUrls: ['./menu-publicacion.component.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule]
 })
 export class MenuPublicacionComponent implements OnInit {
   @Input() public perfilLogeado = false;
@@ -24,7 +27,6 @@ export class MenuPublicacionComponent implements OnInit {
   constructor(public navCtrl: NavController,
       private toastController: ToastController,
       private platform: Platform,
-      private clipboard: ClipboardService,
       private socialSharing: SocialSharing,
       private publicacionesServices: PublicacionesService,
       private utils: UtilsService,
@@ -34,30 +36,42 @@ export class MenuPublicacionComponent implements OnInit {
   
   }
 
-  sharePublicacion(){
-    let message = ""
-    message = "Hola, te comparto la siguiente publicacion de ";
-    if (this.tipoPublicacion == 1){
-      message += "perdido"
-    }else if (this.tipoPublicacion == 2){
-      message += "encontrado"
-    }else if (this.tipoPublicacion == 3){
-      message += "adopción"
-    }else if (this.tipoPublicacion == 4){
-      message += "tránsito"
+  async sharePublicacion() {
+    let message = "🚨 ¡Compartir es ayudar! 🚨 Te comparto la siguiente publicación de ";
+    if (this.tipoPublicacion === '1') {
+      message += "perdido";
+    } else if (this.tipoPublicacion === '2') {
+      message += "encontrado";
+    } else if (this.tipoPublicacion === '3') {
+      message += "adopción";
+    } else if (this.tipoPublicacion === '4') {
+      message += "tránsito";
     }
-    message += " en BETA";
+    message += " en BETA. Ayuda a compartir esta publicación para que más personas la vean y puedan ayudar. 🙏";
     const subject = "Publicacion de BETA";
-    const url = environment.baseFrontUrl+"/publicacion-detalle/"+this.tipoPublicacion+"/"+this.publicacionId;
-    //console.log("Share: " + message + " " + url );
-    if(this.platform.is('cordova')) {
+    const url = environment.baseFrontUrl + "/publicacion-detalle/" + this.tipoPublicacion + "/" + this.publicacionId;
+
+    if (this.platform.is('cordova')) {
       this.socialSharing.share(message, subject, undefined, url);
-    }else {
-      //this.copyText(message + " " + url);
-      this.clipboard.copyFromContent(message + " " + url);
-      // TODO no funciona en web 
-      this.presentToast('Se copio el mensaje al portapapeles');
-    } 
+    } else {
+      try {
+        await navigator.clipboard.writeText(message + "\n" + url);
+        this.presentToast('Se copió el mensaje al portapapeles 📋');
+      } catch (err) {
+        // Fallback para navegadores más antiguos
+        const textArea = document.createElement("textarea");
+        textArea.value = message + " " + url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          this.presentToast('Se copió el mensaje al portapapeles');
+        } catch (err) {
+          this.presentToast('No se pudo copiar al portapapeles');
+        }
+        document.body.removeChild(textArea);
+      }
+    }
     this.onClick();
   }
 

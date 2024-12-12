@@ -16,8 +16,8 @@ export class UsersPage implements OnInit {
   ubicacion: number[]= [];
 
 
-  private showing: number = 1
-  private local_es_organizacion: string = "false";
+  showing: number = 1
+  local_es_organizacion: string = "false";
   user:Usuario = new Usuario();
   password:string = '';
   email = "";

@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { getUrlImg } from 'src/app/utils/utils';
 import { environment } from 'src/environments/environment';
 

@@ -40,10 +40,11 @@ export class AgrupacionesPage implements OnInit {
       this.obtenerOrganizaciones()
     }
     const onError = () => {
-      this.organizaciones = []
-      this.falloUbicacion = true
+      this.centroid = [-34.9206797, -57.9537638];
+      this.falloUbicacion = false
       const refresher = document.getElementById("refresher") as HTMLIonRefresherElement
       refresher.complete()
+      this.obtenerOrganizaciones()
     };    
     this.gpsUtilsService.getGeoPosition(getGeo, onError, true)
   }

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePerEncPageRoutingModule } from './home-per-enc-routing.module';
 
 import { HomePerEncPage } from './home-per-enc.page';
-import { PublicationItemComponent } from 'src/app/components/publication-item/publication-item.component';
+import { PublicationItemModule } from 'src/app/components/publication-item/publication-item.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
@@ -16,8 +16,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     FormsModule,
     IonicModule,
     HomePerEncPageRoutingModule,
+    PublicationItemModule
   ],
-  declarations: [HomePerEncPage,PublicationItemComponent],
+  declarations: [HomePerEncPage],
   providers: [Geolocation]
 })
 export class HomePerEncPageModule {}

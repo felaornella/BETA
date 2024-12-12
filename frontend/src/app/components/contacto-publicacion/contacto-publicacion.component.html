@@ -1,0 +1,46 @@
+<ion-content no-shadow>
+    <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 0 1rem">
+      <ion-toolbar style="background-color: rgba(255,255,255); border-radius: 1rem 1rem 0 0;">
+        <ion-title style="text-align: center; font-family: 'DM-SANS'; font-size: 1.5rem; font-weight: bold; color: rgba(0,0,0,.5);">
+          Contacto
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="close()">
+            <ion-icon style="color: black; height: 1.25rem;" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+  
+      <div style="background-color: rgba(255,255,255); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0 0 1rem 1rem;">
+        <div id="contactos" style="width: 100%; padding-top: .5rem; padding-bottom: 1rem;">
+          <ion-row *ngIf="publicador.instagram_visible" style="justify-content: center; margin-bottom: .5rem;">
+            <ion-icon style="color: black; font-size: 1.3rem;" name="logo-instagram"></ion-icon>
+            <span style="font-size: 1.3rem; margin-left: 1rem;">
+              {{publicador.instagram}}
+            </span>
+          </ion-row>
+  
+          <ion-row *ngIf="publicador.telefono_visible" style="justify-content: center; margin-bottom: .5rem;">
+            <ion-icon style="color: black; font-size: 1.3rem;" name="logo-whatsapp"></ion-icon>
+            <span style="font-size: 1.3rem; margin-left: 1rem;">
+              {{publicador.telefono}}
+            </span>
+          </ion-row>
+  
+          <ion-row *ngIf="publicador.email_visible" style="justify-content: center; margin-bottom: .5rem;">
+            <ion-icon style="color: black; font-size: 1.3rem;" name="mail-outline"></ion-icon>
+            <span style="font-size: 1.3rem; margin-left: 1rem;">
+              {{publicador.email}}
+            </span>
+          </ion-row>
+  
+          <ion-row *ngIf="!publicador.instagram_visible && !publicador.telefono_visible && !publicador.email_visible" style="justify-content: center; padding: 0 1rem 1rem 1rem;">
+            <span style="font-size: 1.5rem; font-family: 'DM-Sans'; opacity: .5; margin: 0 1rem; text-align: center;">
+              Desafortunadamente el usuario no ingreso un telefono de contacto
+            </span>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+          

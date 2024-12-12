@@ -267,3 +267,39 @@ ion-popover ion-item.item-checkbox-checked.sc-ion-select-popover-md{
 		background: #f2f2f2;
 	}
   }
+
+  .transparent-modal {
+	--background: transparent;
+	--ion-background-color: rgba(0, 0, 0, 0.808) !important;
+	--box-shadow: none !important;
+	--height: 100% !important;
+	.modal-wrapper {
+	  background: transparent;
+	  box-shadow: none !important;
+	  height: 100% !important;
+	  width: 100% !important;
+	}
+	ion-content {
+	  --background: transparent;
+	  --box-shadow: none !important;
+	}
+  }
+  .contact-modal {
+	--background: transparent;
+	--ion-background-color: rgba(0,0,0,0.6) !important;
+	--box-shadow: none !important;
+	
+	.modal-wrapper {
+	  background: transparent;
+	  box-shadow: none !important;
+	}
+	ion-content {
+	  --background: transparent;
+	  --box-shadow: none !important;
+	}
+  }
+  .map-modal {
+	--background: transparent;
+	--ion-background-color: rgba(0,0,0,0.6) !important;
+	--box-shadow: none !important;
+  }

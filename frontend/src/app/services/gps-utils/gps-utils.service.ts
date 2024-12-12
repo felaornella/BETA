@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, Platform, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 
@@ -13,6 +13,7 @@ export class GpsUtilsService {
     private toastController : ToastController,
     private alertController: AlertController,
     private navCtrl: NavController,
+    private platform: Platform,
     private locationAccuracy : LocationAccuracy,
     private authService: AuthService) { }
 
@@ -25,38 +26,35 @@ export class GpsUtilsService {
 
   public getGeoPosition(onSuccess, onError, required, backToHome = true) {
     const onSuccessPosition = (position) => {
-        //console.log('getting location', position);
         position = [position.coords.latitude, position.coords.longitude];
         onSuccess(position);
     };
 
     const onErrorPosition = (error) => {
-        //console.log('Error getting location', error);
         if (error.code == GeolocationPositionError.PERMISSION_DENIED) {
             onError();
-            if (required) {
-                this.presentAlert(onSuccess, onError, backToHome);
-            }
+            return;
         }
         if (error.code == GeolocationPositionError.POSITION_UNAVAILABLE || error.code == GeolocationPositionError.TIMEOUT) {
-            //console.log('Falling back to location accuracy, request permission' + this.locationAccuracyRequested );
-           
-            this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-                //console.log('canrequest: ', canRequest);
-                if (canRequest) {
-                    this.locationAccuracyRequested++;
-                    this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-                        () => {
-                            this.getGeoPosition(onSuccess, onError, required, backToHome);
-                        },
-                        error => {
-                            onError();
-                            //console.log('Error requesting location permissions', error);
-                        }
-                    );
-                }
-            });
-           
+            if (this.platform.is('cordova') && this.locationAccuracy) {
+                this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+                    if (canRequest) {
+                        this.locationAccuracyRequested++;
+                        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+                            () => {
+                                this.getGeoPosition(onSuccess, onError, required, backToHome);
+                            },
+                            error => {
+                                onError();
+                            }
+                        );
+                    } else {
+                        onError();
+                    }
+                });
+            } else {
+                onError();
+            }
         }
     };
     navigator.geolocation.getCurrentPosition(onSuccessPosition, onErrorPosition, this.options);
@@ -114,5 +112,3 @@ export class GpsUtilsService {
     await toast.present();
   }
 }
-
-

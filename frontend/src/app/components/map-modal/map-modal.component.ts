@@ -1,11 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActionSheetController, ModalController, NavController, NavParams } from '@ionic/angular';
+import { ActionSheetController, IonicModule, ModalController, NavController, NavParams } from '@ionic/angular';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map-modal',
   templateUrl: './map-modal.component.html',
   styleUrls: ['./map-modal.component.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule]
 })
 export class MapModalComponent implements OnInit {
   @Input()

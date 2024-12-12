@@ -9,16 +9,17 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 import { MapPage } from './map.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { PublicationItemComponent } from 'src/app/components/publication-item/publication-item.component';
+import { PublicationItemModule } from '../../components/publication-item/publication-item.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MapPageRoutingModule
+    MapPageRoutingModule,
+    PublicationItemModule
   ],
-  declarations: [MapPage,PublicationItemComponent],
+  declarations: [MapPage],
   providers: [Geolocation,LocationAccuracy]
 })
 export class MapPageModule {}

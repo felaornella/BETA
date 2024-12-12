@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController, NavController, PopoverController } from '@ionic/angular';
+import { ModalController, NavController, PopoverController, Platform } from '@ionic/angular';
 import { MapModalComponent } from 'src/app/components/map-modal/map-modal.component';
 import { MenuPublicacionComponent } from 'src/app/components/menu-publicacion/menu-publicacion.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -10,13 +10,19 @@ import { PublicacionDetalle } from '../../models/Publicacion';
 // import getUrlImg
 import { getUrlImg } from '../../utils/utils';
 import { UtilsService } from 'src/app/services/utils/utils.service';
+import { ImageMascotaComponent } from 'src/app/components/image-mascota/image-mascota.component';
+import { Subscription } from 'rxjs';
+import { ContactoPublicacionComponent } from '../../components/contacto-publicacion/contacto-publicacion.component';
 
 @Component({
   selector: 'app-publicacion-detalle',
   templateUrl: './publicacion-detalle.page.html',
   styleUrls: ['./publicacion-detalle.page.scss'],
 })
-export class PublicacionDetallePage implements OnInit {
+export class PublicacionDetallePage implements OnInit, OnDestroy {
+  modalI: HTMLIonModalElement; // Define la referencia al modal
+  modalC: HTMLIonModalElement;
+  modalM: HTMLIonModalElement; // Agregamos la referencia para el modal del mapa
   getUrlImg = getUrlImg;
   idPublicacion: string;
   tipoPublicacion: string;
@@ -37,7 +43,8 @@ export class PublicacionDetallePage implements OnInit {
     public navCtrl: NavController,
     private p_service: PublicacionesService,
     private utils: UtilsService,
-    private router: Router
+    private router: Router,
+    private platform: Platform
   ) { 
     route.params.subscribe((params)=>{
       this.idPublicacion = params["publicationId"]
@@ -51,17 +58,67 @@ export class PublicacionDetallePage implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    console.log("entre al destroy")
+    // Importante: cancelar la suscripción cuando se destruye el componente
+    if (this.modalI) {
+      this.modalI.dismiss(); // Cierra el modal si está abierto
+    }
+    if (this.modalC) {
+      this.modalC.dismiss(); // Cierra el modal si está abierto
+    }
+    if (this.modalM) {
+      this.modalM.dismiss();
+    }
+  }
+
   defaultBack(){
-    if (this.tipoPublicacion == "1" || this.tipoPublicacion == "2"){
+    if (this.modalI) {
+      this.modalI.dismiss(); // Cierra el modal si está abierto
+    }
+    console.log("entre al back")
+    if (this.tipoPublicacion === "1" || this.tipoPublicacion === "2"){
       return "/home/perdidos-y-encontrados"
     }else{
       return "/home/adopcion-y-transito"
     }
   }
 
+  // Método para abrir el modal
+  async openImageModal() {
+    this.modalI = await this.modalCtrl.create({
+      component: ImageMascotaComponent,
+      componentProps: {
+        imageUrl: this.getUrlImg(this.publicacion.imagen)
+      },
+      cssClass: 'transparent-modal',
+      backdropDismiss: true,
+      showBackdrop: true
+    });
+
+    // Agregar manejador para clicks en el backdrop
+    const backdropElement = document.querySelector('ion-modal');
+    backdropElement?.addEventListener('click', (e: any) => {
+      if (e.target.tagName === 'ION-MODAL') {
+        this.modalI.dismiss();
+      }
+    });
+
+    this.modalI.onDidDismiss().then(() => {
+      this.modalI = null;
+    });
+
+    return await this.modalI.present();
+  }
+
   back(){
+    
     let lv = this.utils.getUltimasURL() 
     let url_red = null
+     // Cierra el modal si está abierto antes de volver
+     if (this.modalI) {
+      this.modalI.dismiss(); // Cierra el modal si está abierto
+    }
 
     for (let i=lv.length - 1; i>=0; i--){
       if( lv[i] == "/perfil/miperfil" ||
@@ -77,7 +134,7 @@ export class PublicacionDetallePage implements OnInit {
     //console.log("lv: ",lv)
     //console.log("url_red: ",url_red)
     if (url_red == null) {
-      if (this.tipoPublicacion == "1" || this.tipoPublicacion == "2"){
+      if (this.tipoPublicacion === "1" || this.tipoPublicacion === "2"){
         this.navCtrl.navigateRoot("/home/perdidos-y-encontrados")
         return false
       }else{
@@ -123,7 +180,7 @@ export class PublicacionDetallePage implements OnInit {
   }
 
   async openMap() {
-    const modal = await this.modalCtrl.create({
+    this.modalM = await this.modalCtrl.create({
       component: MapModalComponent,
       componentProps: {
         editable: false,
@@ -132,8 +189,12 @@ export class PublicacionDetallePage implements OnInit {
         typePet: this.publicacion.tipo_mascota_id ? parseInt(this.publicacion.tipo_mascota_id.toString()) : 0,
      }
     });
-    modal.present();
 
+    this.modalM.onDidDismiss().then(() => {
+      this.modalM = null;
+    });
+
+    return await this.modalM.present();
   }
 
   obtenerDataPublicaciones(){
@@ -195,5 +256,23 @@ export class PublicacionDetallePage implements OnInit {
 
 
     return await popover.present();
+  }
+
+  async openContactModal() {
+    this.modalC = await this.modalCtrl.create({
+      component: ContactoPublicacionComponent,
+      componentProps: {
+        publicador: this.publicacion.publicador
+      },
+      cssClass: 'contact-modal',
+      backdropDismiss: true,
+      showBackdrop: true
+    });
+
+    this.modalC.onDidDismiss().then(() => {
+      this.modalC = null;
+    });
+
+    return await this.modalC.present();
   }
 }

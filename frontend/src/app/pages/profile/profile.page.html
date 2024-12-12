@@ -18,8 +18,8 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-row [ngClass]="{
-     'background-user': (perfilLogeado() && !userLogged.es_organizacion) || (!perfilLogeado() && user && !user.es_organizacion),
-     'background-association': (perfilLogeado() && userLogged.es_organizacion) || (!perfilLogeado() && user && user.es_organizacion)
+      'background-user': (perfilLogeado() && !userLogged['es_organizacion']) || (!perfilLogeado() && user && !user['es_organizacion']),
+      'background-association': (perfilLogeado() && userLogged['es_organizacion']) || (!perfilLogeado() && user && user['es_organizacion'])
     }">
       <ion-col size="12">
         <img *ngIf="user?.imagen" [src]="getUrlImg(user.imagen)" class="image-profile">

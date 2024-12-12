@@ -160,10 +160,11 @@ export class HomePerEncPage implements OnInit {
       this.obtenerPublicaciones()
     }
     const onError = () => {
-      this.publicaciones = []
-      this.fallo = true
+      this.centroid = [-34.9206797, -57.9537638];
+      this.fallo = false
       const refresher = document.getElementById("refresher") as HTMLIonRefresherElement
       refresher.complete()
+      this.obtenerPublicaciones()
     };
     this.gpsUtilsService.getGeoPosition(getGeo, onError, true)
   }

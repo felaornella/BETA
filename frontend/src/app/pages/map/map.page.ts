@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/naming-convention */
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';import { IonSlides, MenuController, NavController } from '@ionic/angular';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { IonicModule, IonSlides, MenuController, NavController } from '@ionic/angular';
 import { getIconMap } from 'ionicons/dist/types/components/icon/utils';
 import * as L from 'leaflet';
 import { Color, ListadoColoresDTO } from 'src/app/models/Color';
@@ -11,6 +13,7 @@ import { ListadoRazasDTO, Raza } from 'src/app/models/Raza';
 import { GpsUtilsService } from 'src/app/services/gps-utils/gps-utils.service';
 import { PublicacionesService } from 'src/app/services/publicaciones/publicaciones.service';
 import { UtilsService } from 'src/app/services/utils/utils.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-map',
@@ -186,49 +189,39 @@ export class MapPage implements OnInit {
   
 
   getGeoPosition(){
-    const setUserPosition= (position) => {
-      //console.log(position)
-      this.centroid = position;
-      this.userLocation = position;
-      this.map.panTo(position);
-      this.map.setZoom(14);
-      this.map.flyTo(position, 14);
-      this.buscarAqui();
-      //Set marker of user position
-      L.HtmlIcon = L.Icon.extend({
-        options: {
-          /*
-          html: (String) (required)
-          iconAnchor: (Point)
-          popupAnchor: (Point)
-          */
-        },
-      
-        initialize: function (options) {
-          L.Util.setOptions(this, options);
-        },
-      
-        createIcon: function () {
-          var div = document.createElement('div');
-          div.innerHTML = this.options.html;
-          return div;
-        },
-      
-        createShadow: function () {
-          return null;
-        }
-      });
-      const HTMLIcon = L.HtmlIcon.extend({
-        options : {
-            html : "<div class=\"map__marker\"></div>",
-        }
-    });
-      const marker = L.marker(position, { icon: new HTMLIcon()}).addTo(this.map); // TODO CAMBIAR POR ICONO MAS LINDO
-      //marker.bindPopup("Tu ubicación").openPopup();
-    }
-    this.gpsUtilsService.getGeoPosition(setUserPosition, ()=>{}, false)
+    this.gpsUtilsService.getGeoPosition(this.onGeoPositionSuccess.bind(this), this.onGeoPositionError.bind(this), false);
   }
 
+  private onGeoPositionSuccess(position: L.LatLngExpression) {
+    this.centroid = position;
+    this.userLocation = position;
+    this.map.panTo(position);
+    this.map.setZoom(14);
+    this.map.flyTo(position, 14);
+    this.buscarAqui();
+    this.addUserLocationMarker(position);
+  }
+
+  private onGeoPositionError() {
+    const defaultPosition = [-34.9206797, -57.9537638];
+    this.centroid = defaultPosition;
+    this.userLocation = defaultPosition;
+    this.map.panTo(defaultPosition);
+    this.map.setZoom(14);
+    this.map.flyTo(defaultPosition, 14);
+    this.buscarAqui();
+  }
+
+  private addUserLocationMarker(position: L.LatLngExpression) {
+    const marker = L.marker(position, { icon: this.getUserLocationIcon() }).addTo(this.map);
+  }
+
+  private getUserLocationIcon() {
+    return new L.HtmlIcon({
+      html: "<div class=\"map__marker\"></div>",
+    });
+  }
+  
   cargarPublicaciones(lat, long){
     this.publicacionesService.obtenerPublicacionesMapa(lat,long).subscribe(
       (data) => {

@@ -1,11 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController, ModalController, NavParams, ActionSheetController } from '@ionic/angular';
+import { NavController, ModalController, NavParams, ActionSheetController, IonicModule } from '@ionic/angular';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map-perfil',
   templateUrl: './map-perfil.component.html',
   styleUrls: ['./map-perfil.component.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule]
 })
 export class MapPerfilComponent implements OnInit {
   @Input()

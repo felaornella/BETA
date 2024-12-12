@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomeAdopTranPageRoutingModule } from './home-adop-tran-routing.module';
 
 import { HomeAdopTranPage } from './home-adop-tran.page';
-import { PublicationItemComponent } from 'src/app/components/publication-item/publication-item.component';
+import { PublicationItemModule } from '../../components/publication-item/publication-item.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
@@ -15,9 +15,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomeAdopTranPageRoutingModule
+    HomeAdopTranPageRoutingModule,
+    PublicationItemModule
   ],
-  declarations: [HomeAdopTranPage,PublicationItemComponent],
+  declarations: [HomeAdopTranPage],
   providers: [Geolocation]
 })
 export class HomeAdopTranPageModule {}

@@ -336,7 +336,7 @@ export class EditPublicacionPage implements OnInit {
       return false
     }
 
-    if (!this.sinPlaca && this.tipoPublicacion == '2' && (this.publicacion.nombre == "" || this.publicacion.nombre == undefined)){
+    if (!this.sinPlaca && this.tipoPublicacion === '2' && (this.publicacion.nombre == "" || this.publicacion.nombre == undefined)){
       this.presentToastError("Por favor complete el campo nombre de la mascota o seleccione la opción 'Sin placa identificadora'")
       return false
     }
@@ -344,7 +344,7 @@ export class EditPublicacionPage implements OnInit {
       this.publicacion.nombre = ""
     }
 
-    if (this.ubicacion == undefined || this.ubicacion.length == 0){
+    if (this.ubicacion == undefined || this.ubicacion.length === 0){
       this.presentToastError("Por favor seleccione una ubicacion")
       return false
     }
@@ -414,11 +414,11 @@ export class EditPublicacionPage implements OnInit {
         
       })
     }else{
-      if (this.mascotaSeleccionada == 0){
+      if (this.mascotaSeleccionada === 0){
         this.presentToastError("Por favor seleccione una mascota")
         return false
       }
-      if (this.publicacion.tipo == 4 && (this.publicacion.duracion_transito == '' || this.publicacion.duracion_transito == undefined) ) {
+      if (this.publicacion.tipo === 4 && (this.publicacion.duracion_transito == '' || this.publicacion.duracion_transito == undefined) ) {
         this.presentToastError("Por favor seleccione una duración de transito")
         return false
       } 

@@ -44,7 +44,7 @@
   </ion-row>
 
   <form id="editUser" style="padding-inline: .2rem; padding-top: 1rem;" class="edit-user-form">
-    <input [(ngModel)]="local_imagen" name="local_imagen" type="file" accept="image/jpeg" id="imagen_perfil" hidden (change)="changeListener($event)">
+    <input name="local_imagen" type="file" accept="image/jpeg" id="imagen_perfil" hidden (change)="changeListener($event)">
 
     <ion-item lines="none">
       <ion-label class="labelInput"position="floating">Nombre *</ion-label>

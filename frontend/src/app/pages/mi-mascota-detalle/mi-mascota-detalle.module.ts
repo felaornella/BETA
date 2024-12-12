@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MiMascotaDetallePageRoutingModule } from './mi-mascota-detalle-routing.module';
 
 import { MiMascotaDetallePage } from './mi-mascota-detalle.page';
-import { MenuMascotaComponent } from 'src/app/components/menu-mascota/menu-mascota/menu-mascota.component';
+import { MenuMascotaComponent } from '../../components/menu-mascota/menu-mascota/menu-mascota.component';
+
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { MenuMascotaComponent } from 'src/app/components/menu-mascota/menu-masco
     FormsModule,
     IonicModule,
     MiMascotaDetallePageRoutingModule,
+    MenuMascotaComponent
   ],
-  declarations: [MiMascotaDetallePage, MenuMascotaComponent]
+  declarations: [MiMascotaDetallePage]
 })
 export class MiMascotaDetallePageModule {}

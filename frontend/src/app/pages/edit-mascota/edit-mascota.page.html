@@ -28,7 +28,7 @@
             <ion-select [interfaceOptions]="{size: 'cover'}" interface="popover"
                         placeholder="Tipo de Mascota" 
                         [(ngModel)]="local_tipo_mascota_id"
-                        (change)="obtenerRazarPorTipo()"
+                        (ionChange)="obtenerRazasPorTipo()"
                         name="tipomascota"
                         style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
                 <ion-select-option *ngFor="let t of tipos" value="{{t.id}}">{{t.nombre}}</ion-select-option>

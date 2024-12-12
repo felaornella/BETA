@@ -1,0 +1,38 @@
+:host {
+    --background: transparent;
+    --box-shadow: none;
+  }
+  
+  ion-content {
+    --background: transparent;
+    --box-shadow: none;
+  }
+  
+  ion-toolbar {
+    --background: transparent;
+    --box-shadow: none;
+  }
+  
+  .contact-wrapper {
+      background: white;
+      border-radius: 1rem;
+      margin: 1rem;
+      padding: 1rem;
+      box-shadow: none; // Removemos el box-shadow
+    }
+  
+  #contactos {
+    ion-row {
+      padding: 0.5rem;
+      align-items: center;
+      
+      ion-icon {
+        font-size: 1.5rem;
+      }
+      
+      span {
+        margin-left: 1rem;
+        font-family: 'DM-Sans';
+      }
+    }
+  }

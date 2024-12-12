@@ -3,6 +3,7 @@ export class Pet{
     nombre: string;
     fecha_nacimiento: string;
     colores: Array<string>;
+    edad: string;
     size: string;
     sexo: string;
     caracteristicas: string;

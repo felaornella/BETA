@@ -11,9 +11,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SocialsTextComponent } from 'src/app/components/socials-text/socials-text.component';
 import { TextInfoComponent } from 'src/app/components/text-info/text-info.component';
 import { OwnPetsComponent } from 'src/app/components/own-pets/own-pets.component';
-import { PublicationItemComponent } from 'src/app/components/publication-item/publication-item.component';
-import { MenuPerfilComponent } from 'src/app/components/menu-perfil/menu-perfil.component';
-import { MapPerfilComponent } from 'src/app/components/map-perfil/map-perfil.component';
+
+import { MenuPerfilComponent } from '../../components/menu-perfil/menu-perfil.component';
+import { MapPerfilComponent } from '../../components/map-perfil/map-perfil.component';
+import { PublicationItemModule } from '../../components/publication-item/publication-item.module';
 
 const routes: Routes = [
   {
@@ -28,15 +29,15 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MenuPerfilComponent,
+    MapPerfilComponent,
+    OwnPetsComponent,
+    PublicationItemModule
   ],
   declarations: [
     ProfilePage,
     TextInfoComponent,
-    SocialsTextComponent,
-    OwnPetsComponent,
-    PublicationItemComponent,
-    MenuPerfilComponent,
-    MapPerfilComponent]
+    SocialsTextComponent]
 })
 export class ProfilePageModule {}

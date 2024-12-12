@@ -14,22 +14,22 @@
 
 <ion-row style="display: flex; justify-content: center; align-items: center; background-color: var(--ion-color-background); height: 3rem;">
   <ion-col >
-    <div *ngIf="tipoPublicacion==1" style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngIf="tipoPublicacion === '1'" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Editar Publicación - </b><b style="color: var(--ion-color-perdidos)">Mascota Perdida</b></p>
       <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-perdidos);"></div>
     </div>
 
-    <div *ngIf="tipoPublicacion==2" style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngIf="tipoPublicacion === '2'" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Editar Publicación - </b><b style="color: var(--ion-color-encontrados)">Mascota Encontrada</b></p>
       <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-encontrados);"></div>
     </div>
 
-    <div *ngIf="tipoPublicacion==3" style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngIf="tipoPublicacion === '3'" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Editar Publicación - </b><b style="color: var(--ion-color-adopcion)">Mascota en Adopción</b></p>
       <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-adopcion);"></div>
     </div>
 
-    <div *ngIf="tipoPublicacion==4" style="display: flex; flex-direction: column; align-items: center;">
+    <div *ngIf="tipoPublicacion === '4'" style="display: flex; flex-direction: column; align-items: center;">
       <p style="margin:0;font-family: DM-Sans; font-size: 1.1rem;"><b style="color: black;">Editar Publicación - </b><b style="color: var(--ion-color-transito)">Mascota en Tránsito</b></p>
       <div style="margin: .35rem 0 0 0; height: 3px; width: 80% ;background-color: var(--ion-color-transito);"></div>
     </div>
@@ -38,7 +38,7 @@
 </ion-row>
 <ion-content>
   <!-- <ion-tabs style="width:100%;">
-    <ion-tab-bar slot="top" *ngIf="tipoPublicacion!=2">
+    <ion-tab-bar slot="top" *ngIf="tipoPublicacion!=='2'">
       <ion-tab-button tab="new-pet" style="max-width: 100%">
         <ion-label>Editar Mascota</ion-label>
       </ion-tab-button>
@@ -49,7 +49,7 @@
   </ion-tabs> -->
   
   <!-- SELECTOR DE FORMA DE CARGA -->
-  <ion-row style="height: 3.5rem;" *ngIf="tipoPublicacion!=2">
+  <ion-row style="height: 3.5rem;" *ngIf="tipoPublicacion!=='2'">
     <ion-col size="6" style="padding: 0;">
       <ion-button (click)="switchType()" 
                   [ngClass]="{'typeButton': true,
@@ -89,10 +89,10 @@
         <ion-row>
             <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Nombre *</p>
         </ion-row>
-        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion!=2">
+        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion!=='2'">
             <ion-input placeholder="Nombre" [(ngModel)]="publicacion.nombre" style="border-bottom: 2px solid rgba(0,0,0,.7);"></ion-input>
         </ion-row>
-        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion==2">
+        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion === '2'">
             <ion-col size="6">
                 <ion-input placeholder="Nombre" [(ngModel)]="publicacion.nombre" style="border-bottom: 2px solid rgba(0,0,0,.7);" disabled="{{sinPlaca}}"></ion-input>
             </ion-col>
@@ -110,15 +110,15 @@
     </div>
     <div id="edadMascotaDiv">
         <ion-row>
-            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Edad <span *ngIf="tipoPublicacion==2" style="font-weight: normal; font-size: .8rem;">(estimada)</span> *</p>
+            <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Edad <span *ngIf="tipoPublicacion === '2'" style="font-weight: normal; font-size: .8rem;">(estimada)</span> *</p>
         </ion-row>
-        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion!=2">
+        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion!=='2'">
             <ion-col size="6" style="padding-left: 0">
-                <ion-select placeholder="Edad" [interfaceOptions]="{size: 'cover'}" interface="popover" *ngIf="edadTipo==1" [(ngModel)]="local_edad" id="edadValor"
+                <ion-select placeholder="Edad" [interfaceOptions]="{size: 'cover'}" interface="popover" *ngIf="edadTipo==='1'" [(ngModel)]="local_edad" id="edadValor"
                         style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
                     <ion-select-option  *ngFor="let num of years" value="{{num}}">{{num}}</ion-select-option>
                 </ion-select>
-                <ion-select placeholder="Edad" [interfaceOptions]="{size: 'cover'}" interface="popover" *ngIf="edadTipo==2" [(ngModel)]="local_edad" id="edadValor"
+                <ion-select placeholder="Edad" [interfaceOptions]="{size: 'cover'}" interface="popover" *ngIf="edadTipo==='2'" [(ngModel)]="local_edad" id="edadValor"
                         style="width: 100%; border: 2px solid rgba(0,0,0,.7); border-radius: .25rem;">
                     <ion-select-option  *ngFor="let num of months" value="{{num}}">{{num}}</ion-select-option>
                 </ion-select>
@@ -131,7 +131,7 @@
                 </ion-select>
             </ion-col>
         </ion-row>
-        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion==2">
+        <ion-row style="margin-top: .5rem;" *ngIf="tipoPublicacion === '2'">
             <ion-select placeholder="Edad estimada"
                     [(ngModel)]="publicacion.edad_estimada"
                     [interfaceOptions]="{size: 'cover'}" interface="popover"
@@ -223,7 +223,7 @@
                   <ion-icon  name="folder-outline" style="height: 1rem;"></ion-icon>
               </ion-button>
           </ion-col>
-          <ion-col size="6" style="padding-left: 0;" *ngIf="tipoPublicacion==2">
+          <ion-col size="6" style="padding-left: 0;" *ngIf="tipoPublicacion === '2'">
             <ion-button (click)="takePicture()" fill="outline" style="width: 100%; --padding-start:0; --padding-end:0; margin-top: 0; --color:#3880ff; --border-color:#3880ff" >
                 <span style="font-family: DM-Sans; font-weight: bold; margin-right: .5rem;">Camara</span>
                 <ion-icon  name="camera-outline" style="height: 1rem;"></ion-icon>
@@ -240,7 +240,7 @@
         </ion-row>
     </div>
 
-    <div id="descripcionMedicaDiv" *ngIf="tipoPublicacion==3 || tipoPublicacion==4">
+    <div id="descripcionMedicaDiv" *ngIf="tipoPublicacion === '3' || tipoPublicacion === '4'">
         <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold;  margin-bottom: 0;">Descripción Medica</p>
         <ion-col style="display: flex; flex-direction: column; padding-left: 1rem;">
             <ion-row style="margin-top: 1rem;">
@@ -287,7 +287,7 @@
 
     </div>
     
-    <div id="duracionTransitoDiv" *ngIf="tipoPublicacion==4">
+    <div id="duracionTransitoDiv" *ngIf="tipoPublicacion === '4'">
         <ion-row>
             <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Duracion aproximada *</p>
         </ion-row>
@@ -302,7 +302,7 @@
         </ion-row>
     </div>
 
-    <div id="retuvoMascotaDiv" *ngIf="tipoPublicacion==2">
+    <div id="retuvoMascotaDiv" *ngIf="tipoPublicacion === '2'">
       <ion-row style="margin-top: 1rem;">
         <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0; margin-top: 0;">¿Retuvo a la mascota? *</p>
       </ion-row>
@@ -320,7 +320,7 @@
       </ion-row>
     </div>
     
-    <div id="contactoAnonimo" *ngIf="tipoPublicacion == 2 && !loggedIn">
+    <div id="contactoAnonimo" *ngIf="tipoPublicacion === '2' && !loggedIn">
       <ion-row>
           <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Telefono de Contacto</p>
       </ion-row>
@@ -350,10 +350,10 @@
                 <ion-toggle style="margin: 0; padding-left: 0;" 
                             (ionChange)="toggleUbicacionActual()"
                             [(ngModel)]="ubicacionActual"
-                            [ngClass]="{'toggle-Per': (tipoPublicacion == 1),
-                                        'toggle-Enc': (tipoPublicacion == 2),
-                                        'toggle-Ado': (tipoPublicacion == 3),
-                                        'toggle-Tra': (tipoPublicacion == 4)}"
+                            [ngClass]="{'toggle-Per': (tipoPublicacion === '1'),
+                                        'toggle-Enc': (tipoPublicacion === '2'),
+                                        'toggle-Ado': (tipoPublicacion === '3'),
+                                        'toggle-Tra': (tipoPublicacion === '4')}"
                                         ></ion-toggle> 
                 <span style="font-family: DM-Sans; font-size: .9rem;" >Usar ubicación actual</span>
                 </ion-row>
@@ -372,19 +372,19 @@
     </div>
 
     <div id="botonPublicarDiv" style="margin-top: 1rem; margin-bottom: 2rem;">
-        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 1" style="width: 100%; height: 4rem; --background: var(--ion-color-perdidos); --border-radius: 1rem">
+        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '1'" style="width: 100%; height: 4rem; --background: var(--ion-color-perdidos); --border-radius: 1rem">
             <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Busqueda </span>
         </ion-button>
 
-        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 2" style="width: 100%; height: 4rem; --background: var(--ion-color-encontrados); --border-radius: 1rem">
+        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '2'" style="width: 100%; height: 4rem; --background: var(--ion-color-encontrados); --border-radius: 1rem">
             <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Avistamiento </span>
         </ion-button>
 
-        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 3" style="width: 100%; height: 4rem; --background: var(--ion-color-adopcion); --border-radius: 1rem">
+        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '3'" style="width: 100%; height: 4rem; --background: var(--ion-color-adopcion); --border-radius: 1rem">
             <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Adopción </span>
         </ion-button>
 
-        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 4" style="width: 100%; height: 4rem; --background: var(--ion-color-transito); --border-radius: 1rem">
+        <ion-button  (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '4'" style="width: 100%; height: 4rem; --background: var(--ion-color-transito); --border-radius: 1rem">
             <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Tránsito </span>
         </ion-button>
     </div>
@@ -397,10 +397,10 @@
       <ion-spinner color="beta" name="circular"></ion-spinner>
     </ion-item>
     <ion-row  id="{{mas.id}}" (click)="seleccionarMascota(mas.id)" *ngFor="let mas of mascotas"
-              [ngClass]="{'selected-Per': (mascotaSeleccionada == mas.id) && (tipoPublicacion == 1),
-                          'selected-Enc': (mascotaSeleccionada == mas.id) && (tipoPublicacion == 2),
-                          'selected-Ado': (mascotaSeleccionada == mas.id) && (tipoPublicacion == 3),
-                          'selected-Tra': (mascotaSeleccionada == mas.id) && (tipoPublicacion == 4),
+              [ngClass]="{'selected-Per': (mascotaSeleccionada == mas.id) && (tipoPublicacion === '1'),
+                          'selected-Enc': (mascotaSeleccionada == mas.id) && (tipoPublicacion === '2'),
+                          'selected-Ado': (mascotaSeleccionada == mas.id) && (tipoPublicacion === '3'),
+                          'selected-Tra': (mascotaSeleccionada == mas.id) && (tipoPublicacion === '4'),
                           'not-selected': (mascotaSeleccionada != mas.id)}">
       <ion-col size="6" style="padding: 0; background-image: url('{{getUrlImg(mas.imagen)}}'); 
                               background-size: cover; border-radius: .25rem 0 0 .25rem; background-position: center;
@@ -426,7 +426,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row style="width: 90%;" *ngIf="tipoPublicacion==4">
+    <ion-row style="width: 90%;" *ngIf="tipoPublicacion === '4'">
       <ion-col>
         <ion-row>
             <p style="font-family: DM-Sans; font-size: 1rem; font-weight: bold; opacity: .5; margin-bottom: 0;">Duracion aproximada *</p>
@@ -466,10 +466,10 @@
               <ion-toggle style="margin: 0; padding-left: 0;"
                           (ionChange)="toggleUbicacionActual()" 
                           [(ngModel)]="ubicacionActual"
-                          [ngClass]="{'toggle-Per': (tipoPublicacion == 1),
-                                      'toggle-Enc': (tipoPublicacion == 2),
-                                      'toggle-Ado': (tipoPublicacion == 3),
-                                      'toggle-Tra': (tipoPublicacion == 4)}"
+                          [ngClass]="{'toggle-Per': (tipoPublicacion === '1'),
+                                      'toggle-Enc': (tipoPublicacion === '2'),
+                                      'toggle-Ado': (tipoPublicacion === '3'),
+                                      'toggle-Tra': (tipoPublicacion === '4')}"
                                       ></ion-toggle> 
               <span style="font-family: DM-Sans; font-size: .9rem;" >Usar ubicación actual</span>
             </ion-row>
@@ -490,19 +490,19 @@
 
     <ion-row style="width: 90%; margin-bottom: 2rem; margin-top: 1rem;">
       <ion-col>
-        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 1" style="width: 100%; height: 4rem; --background: var(--ion-color-perdidos); --border-radius: 1rem">
+        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '1'" style="width: 100%; height: 4rem; --background: var(--ion-color-perdidos); --border-radius: 1rem">
           <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Busqueda </span>
         </ion-button>
 
-        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 2" style="width: 100%; height: 4rem; --background: var(--ion-color-encontrados); --border-radius: 1rem">
+        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '2'" style="width: 100%; height: 4rem; --background: var(--ion-color-encontrados); --border-radius: 1rem">
           <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Avistamiento </span>
         </ion-button>
 
-        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 3" style="width: 100%; height: 4rem; --background: var(--ion-color-adopcion); --border-radius: 1rem">
+        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '3'" style="width: 100%; height: 4rem; --background: var(--ion-color-adopcion); --border-radius: 1rem">
           <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Adopción </span>
         </ion-button>
 
-        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion == 4" style="width: 100%; height: 4rem; --background: var(--ion-color-transito); --border-radius: 1rem">
+        <ion-button (click)="enviarPublicacion()" *ngIf="tipoPublicacion === '4'" style="width: 100%; height: 4rem; --background: var(--ion-color-transito); --border-radius: 1rem">
           <span style="font-size: 1.2rem; font-family: DM-Sans; text-transform: none; font-weight: 600;"> Actualizar Tránsito </span>
         </ion-button>
       </ion-col>

@@ -7,15 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { PublicacionDetallePageRoutingModule } from './publicacion-detalle-routing.module';
 
 import { PublicacionDetallePage } from './publicacion-detalle.page';
-import { MenuPublicacionComponent } from 'src/app/components/menu-publicacion/menu-publicacion.component';
+import { MenuPublicacionComponent } from '../../components/menu-publicacion/menu-publicacion.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PublicacionDetallePageRoutingModule
+    PublicacionDetallePageRoutingModule,
+    MenuPublicacionComponent
   ],
-  declarations: [PublicacionDetallePage,MenuPublicacionComponent]
+  declarations: [PublicacionDetallePage]
 })
 export class PublicacionDetallePageModule {}
