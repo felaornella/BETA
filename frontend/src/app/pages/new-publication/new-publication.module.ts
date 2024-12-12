@@ -9,6 +9,7 @@ import { NewPublicationPageRoutingModule } from './new-publication-routing.modul
 import { NewPublicationPage } from './new-publication.page';
 import { RouterModule, Routes } from '@angular/router';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     NewPublicationPageRoutingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MapModalModule
   ],
   declarations: [NewPublicationPage],
   providers: [Geolocation]

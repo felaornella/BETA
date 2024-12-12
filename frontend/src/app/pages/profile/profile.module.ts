@@ -15,6 +15,7 @@ import { OwnPetsComponent } from 'src/app/components/own-pets/own-pets.component
 import { MenuPerfilComponent } from '../../components/menu-perfil/menu-perfil.component';
 import { MapPerfilComponent } from '../../components/map-perfil/map-perfil.component';
 import { PublicationItemModule } from '../../components/publication-item/publication-item.module';
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     MenuPerfilComponent,
     MapPerfilComponent,
     OwnPetsComponent,
-    PublicationItemModule
+    PublicationItemModule,
+    MapModalModule
   ],
   declarations: [
     ProfilePage,

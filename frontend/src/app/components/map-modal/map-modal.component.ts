@@ -6,9 +6,7 @@ import * as L from 'leaflet';
 @Component({
   selector: 'app-map-modal',
   templateUrl: './map-modal.component.html',
-  styleUrls: ['./map-modal.component.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule]
+  styleUrls: ['./map-modal.component.scss']
 })
 export class MapModalComponent implements OnInit {
   @Input()

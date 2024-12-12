@@ -8,6 +8,7 @@ import { UsersPageRoutingModule } from './users-routing.module';
 
 import { UsersPage } from './users.page';
 import { RouterModule, Routes } from '@angular/router';
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     UsersPageRoutingModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MapModalModule 
   ],
   declarations: [UsersPage]
 })

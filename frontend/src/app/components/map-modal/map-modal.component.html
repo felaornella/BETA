@@ -12,9 +12,7 @@
     </ion-title>
     
       <ion-buttons slot="end">
-        <div [ngIf]="editable === true">
-                <ion-button color="light" (click)="confirm()">{{confirmText}}</ion-button>
-        </div>
+        <ion-button color="light" *ngIf="editable" (click)="confirm()">{{confirmText}}</ion-button>
       </ion-buttons>
     
     

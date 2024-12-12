@@ -9,13 +9,16 @@ import { PublicacionDetallePageRoutingModule } from './publicacion-detalle-routi
 import { PublicacionDetallePage } from './publicacion-detalle.page';
 import { MenuPublicacionComponent } from '../../components/menu-publicacion/menu-publicacion.component';
 
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     PublicacionDetallePageRoutingModule,
-    MenuPublicacionComponent
+    MenuPublicacionComponent,
+    MapModalModule
   ],
   declarations: [PublicacionDetallePage]
 })

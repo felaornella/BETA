@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { RangeCustomEvent } from '@ionic/angular';
 import { RangeValue } from '@ionic/core';
@@ -11,6 +11,7 @@ import { Color, ListadoColoresDTO } from 'src/app/models/Color';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ActivatedRoute } from '@angular/router';
 import { GpsUtilsService } from 'src/app/services/gps-utils/gps-utils.service';
+import { MapModalComponent } from '../../components/map-modal/map-modal.component';
 
 @Component({
   selector: 'app-home-adop-tran',
@@ -58,7 +59,8 @@ export class HomeAdopTranPage implements OnInit {
     public menuCtrl: MenuController,
     private utilsService: UtilsService,
     private service: PublicacionesService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class HomeAdopTranPage implements OnInit {
       this.obtenerPublicaciones()
     }
     const onError = () => {
-      this.centroid = [-34.9206797, -57.9537638];
+      this.centroid = this.mapaStarter ? this.mapaStarter : [-34.9206797, -57.9537638];
       this.fallo = false
       const refresher = document.getElementById("refresher") as HTMLIonRefresherElement
       refresher.complete()
@@ -288,6 +290,31 @@ export class HomeAdopTranPage implements OnInit {
     this.utilsService.obtenerRazasPorTipo(this.local_tipo_mascota_id).subscribe((data) => {
       this.razas = (data as ListadoRazasDTO).razas;
     });
+  }
+
+  mapaStarter: number[]
+  async openLocationMap() {
+    
+    const modal = await this.modalCtrl.create({
+      component: MapModalComponent,
+      componentProps: {
+        editable: true,
+        marker: this.mapaStarter,
+        typePublication: '1',
+        typePet: 0,
+     }
+    });
+    modal.present();
+    const { data , role } = await modal.onWillDismiss();
+    console.log(data);
+    console.log(role);
+    if (role === 'confirm') {
+      
+      this.centroid = [data["lat"],data["lng"]];
+      this.mapaStarter = [data["lat"],data["lng"]];
+      this.obtenerPublicaciones();
+      // Update data
+    }
   }
 
 }

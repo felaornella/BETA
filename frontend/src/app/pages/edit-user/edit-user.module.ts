@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EditUserPageRoutingModule } from './edit-user-routing.module';
 
 import { EditUserPage } from './edit-user.page';
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditUserPageRoutingModule
+    EditUserPageRoutingModule,
+    MapModalModule  
   ],
   declarations: [EditUserPage]
 })

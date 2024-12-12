@@ -8,12 +8,15 @@ import { EditPublicacionPageRoutingModule } from './edit-publicacion-routing.mod
 
 import { EditPublicacionPage } from './edit-publicacion.page';
 
+import { MapModalModule } from '../../components/map-modal/map-modal.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditPublicacionPageRoutingModule
+    EditPublicacionPageRoutingModule,
+    MapModalModule
   ],
   declarations: [EditPublicacionPage]
 })

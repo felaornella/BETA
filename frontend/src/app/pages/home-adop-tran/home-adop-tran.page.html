@@ -36,26 +36,45 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-row [style]="(!publicaciones || publicaciones?.length == 0) ?  'margin-top: 90%;' : '' ">
-    <ion-col *ngIf="!publicaciones" style="display: flex; flex-direction: column; align-items: center;">
-      <ion-item  id="spinnerCarga" style="transform: scale(2); --inner-border-width:0; --background:transparent">
-        <ion-spinner color="beta" name="circular"></ion-spinner>
-      </ion-item>
-    </ion-col>
-    <ion-col size="12">
-      <ion-item *ngIf="publicaciones?.length == 0" style="text-align: center; --background: transparent; --inner-border-width: 0; --border-width: 0; --inner-padding-end: 0; --inner-padding-start: 0;">
-        <ion-label *ngIf="!fallo" style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3;">Aun no hay publicaciones</ion-label>
-        <ion-label *ngIf="fallo" style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3;">No se pudieron obtener publicaciones</ion-label>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  
-  <div class="listado">
+  <div class="listado" *ngIf="publicaciones?.length > 0">
     <ion-row style="display: flex; justify-content: center;">
-      
-        <app-publication-item  class="columna_variable" *ngFor="let publi of publicaciones" [hidden]="!publi.visible" (click)="detallePublicacion(publi.tipo,publi.id)" [publi]="publi"></app-publication-item>
-      
+      <app-publication-item 
+        class="columna_variable" 
+        *ngFor="let publi of publicaciones" 
+        [hidden]="!publi.visible" 
+        (click)="detallePublicacion(publi.tipo,publi.id)" 
+        [publi]="publi">
+      </app-publication-item>
     </ion-row>
+  </div>
+  <div *ngIf="publicaciones?.length == 0" 
+       style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: calc(100% - 56px); text-align: center;">
+    <div style="width: 100%; max-width: 400px;">
+      <ion-item style="--background: transparent; --inner-border-width: 0; --border-width: 0; --inner-padding-end: 0; --inner-padding-start: 0;">
+        <ion-label *ngIf="!fallo" 
+                   style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3; text-align: center; width: 100%;">
+          Aun no hay publicaciones
+        </ion-label>
+        <ion-label *ngIf="fallo" 
+                   style="font-size: 1.2rem; font-weight: 500; font-family: DM-Sans; font-weight: bold; opacity: .3; text-align: center; width: 100%;">
+          No se pudieron obtener publicaciones
+        </ion-label>
+      </ion-item>
+      
+      <div style="text-align: center; margin-top: 10px;">
+        <ion-button color="beta" fill="solid" (click)="openLocationMap()" style="text-transform: none; width: 100%;">
+          <ion-icon slot="start" name="map-outline"></ion-icon>
+          Prueba buscando en otra zona
+        </ion-button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!publicaciones" 
+       style="display: flex; justify-content: center; align-items: center; height: calc(100% - 56px);">
+    <ion-item id="spinnerCarga" 
+              style="transform: scale(2); --inner-border-width:0; --background:transparent">
+      <ion-spinner color="beta" name="circular"></ion-spinner>
+    </ion-item>
   </div>
 </ion-content>
 <ion-menu side="end"
@@ -74,16 +93,13 @@
     <ion-list style="background:transparent; padding-left: .5rem;">
       <ion-item style="--background:transparent; margin-bottom: .5rem;">
         <ion-col style="margin: 0; padding: 0;">
-          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Distancia a la redonda</span><span style="margin-left: .25rem; color: white; font-size: .8rem;">(km)</span>
-          <ion-range [dualKnobs]="true"  [value]="filtro.distancia" [(ngModel)]="filtro.distancia" [max]="25"></ion-range>
-          <ion-row style="margin-bottom: .5rem;">
-            <ion-col size="6" style="padding: 0;">
-              <span style="margin-left: .25rem; color: white; font-size: .8rem;">Min: {{filtro.distancia.lower}}</span><br>
-            </ion-col>
-            <ion-col size="6" style="padding: 0;">
-              <span style="margin-left: .25rem; color: white; font-size: .8rem;">Max: {{filtro.distancia.upper}}</span>
-            </ion-col>
-          </ion-row>
+          <span style="color:white; font-size:.9rem; font-family: DM-Sans; font-weight: 600;max-width: 100%; font-size:1.2rem; margin: 0;">Ubicación de búsqueda</span>
+          <ion-button expand="block" fill="outline" 
+                     (click)="openLocationMap()" 
+                     style="margin-top: 8px; --border-color: white; --color: white;">
+            <ion-icon slot="start" name="location-outline"></ion-icon>
+            Cambiar ubicación
+          </ion-button>
         </ion-col>
       </ion-item>
 
