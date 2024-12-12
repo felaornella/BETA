@@ -19,6 +19,7 @@ import { MapModalModule } from '../../components/map-modal/map-modal.module';
     HomePerEncPageRoutingModule,
     PublicationItemModule,
     MapModalModule 
+  ],
   declarations: [HomePerEncPage],
   providers: [Geolocation]
 })
